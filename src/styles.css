@@ -1,0 +1,208 @@
+html {
+  background: url(https://img.freepik.com/free-vector/green-digital-binary-numbers-glowing-background_1017-37271.jpg?w=1060&t=st=1684174436~exp=1684175036~hmac=ed1bf2de0258f1b90e59eed71a91cab86aa338881f5ecc6ba20e1ef07732b6ec)
+    no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body {
+  font-family: 'Chakra Petch', sans-serif;
+  color: #00ff41;
+}
+#landingPage {
+  margin: auto;
+  width: 80%;
+}
+
+h1 {
+  font-size: 80px;
+}
+#userLoginH2 {
+  font-size: 50px;
+}
+
+#passwordLabel {
+  font-size: 50px;
+}
+
+.login {
+  margin: auto;
+  margin-top: 150px;
+  width: 60%;
+  padding: 1rem 1rem 2em 1rem;
+  background-color: black;
+  opacity: 0.7;
+  border: 2px solid #00ff41;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputField {
+  width: 60%;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+}
+
+#goButton {
+  width: 150px;
+}
+
+#letsGo {
+  margin-top: 50px;;
+  width: 200px;
+  height:60px;
+  font-size: 30px;
+}
+
+#loginButton {
+  font-size:20px;
+  width: 100px;
+  background-color: #00ff41;
+  height: 40px;
+  border-radius: 12px;
+  font-weight:bold;
+}
+#createAccount {
+  font-size:20px;
+  width: 180px;
+  background-color: #00ff41;
+  height: 40px;
+  border-radius: 12px;
+  font-weight:bold;
+}
+#userLabel {
+  font-size: 30px;
+}
+#passwordLabel {
+  font-size: 30px;
+}
+
+input[type='text'] {
+  background-color: rgb(129, 124, 124);
+  color: #04f340;
+  font-size: 20px;
+  height: 40px;
+  border-radius: 5px;
+}
+
+.userButtons {
+  width: 50%;
+  display:flex;
+  padding-top: 40px;
+  align-items: space-between;
+  justify-content: space-around;
+}
+.congrats {
+  margin: auto;
+  margin-top: 150px;
+  width: 80%;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #00ff41;
+  background-color: black;
+  opacity: 0.7;
+}
+#congratsTitle {
+  font-size:30px;
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.starterDiv,
+.starterPrompt {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.starterPrompt, h2 {
+  font-size: 50px;
+}
+
+
+
+.starterDiv button {
+  /* width: ; */
+}
+
+.questionsDiv {
+  margin:auto;
+  margin-top: 120px;
+  height: 800px;
+  background-color: rgb(16, 15, 15);
+  opacity: 0.7;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* #question {
+
+} */
+
+.options {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.questionsDiv button {
+  width: 400px;
+  margin: 14px;
+}
+
+/* CSS */
+.button-43 {
+  background-color: #00ff41;
+  border: 1px solid #00ff41;
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px 0;
+  box-sizing: border-box;
+  color: black;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  outline: none;
+  outline: 0;
+  padding: 10px 25px;
+  text-align:start;
+  transform: translateY(0);
+  transition: transform 150ms, box-shadow 150ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+
+}
+
+.button-43:hover {
+  box-shadow: rgba(0, 0, 0, 0.15) 0 3px 9px 0;
+  transform: translateY(-2px);
+}
+
+#tryAgainBtn {
+ color:black;
+ font-weight: bold;
+}
+
+@media (min-width: 768px) {
+  .button-43 {
+    padding: 10px 30px;
+  }
+}
