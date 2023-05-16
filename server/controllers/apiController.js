@@ -4,22 +4,22 @@ const apiController = {};
 apiController.retrieveData = async (req, res, next) => {
   try {
     console.log('Trying to retrieve data');
-    const { subject } = req.body;
+    const { subject } = req.params;
     let number;
-    if (subject === 'sports') {
+    if (subject === 'Sports') {
       number = 21;
-    } else if (subject === 'computers') {
+    } else if (subject === 'Computers') {
       number = 18;
     } else if (subject === 'Mathematics') {
       number = 19;
     }
     const url = `https://opentdb.com/api.php?amount=10&category=${number}&difficulty=medium&type=multiple`;
-    const reponse = await axios.get(url);
+    const response = await axios.get(url);
     const data = response.data;
-
-    console.log('data in apiController' + data);
-
     const result = data.result;
+
+    console.log("this is the result array " + result);
+
     res.locals.result = result;
     return next();
   } catch (err) {
