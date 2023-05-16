@@ -1,28 +1,71 @@
 const express = require('express');
-const path = require('path');
 const app = express();
-const cookieParser = require('cookie-parser');
+const PORT = 3000;
 
-const mongoose = require('mongoose');
-
-const questionsController = require('./controllers/questionsController.js');
-
+const apiController = require('./controllers/apiController.js');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
 
-app.get('/', (req, res) => {
-  return res.status(200).sendFile(path.join(__dirname, 'public/index.html'));
+//login handler
+app.get('/users/', userController.verifyUser, (req, res) => {
+  if (res.locals.user) {
+    return res.status(200).send(res.locals.user);
+  } else {
+    return res.status(204).send('Wrong credentials');
+  }
+});
+// signup handler
+app.post('/users/signup', userController.createUser, (req, res) => {
+  return res.status(201).send(res.locals.user);
 });
 
-app.get('/questions', questionsController.shuffleQuestions, (req, res) => {
-  return res.status(200).json(res.locals.questions);
+//handler for getting all questions from the api
+app.post('/questions/:category', apiController.retrieveData, (req, res) => {
+  return res.status(200).json(res.locals.result);
 });
 
-app.post('/questions/add', questionsController.addQuestions, (req, res) => {
-  return res.status(200);
+app.patch('/users/:user', userController.updateScore, (req, res) => {
+  return res.status(202).json('Score Updated');
 });
 
-app.listen(3001);
+//global error handler
+app.use((err, req, res, next) => {
+  const defaultError = {
+    log: 'Express error handle caught unknown middleware error',
+    status: 400,
+    message: { err: 'An error occured' },
+  };
+  const errObj = Object.assign(defaultError, err);
+  return res.status(errObj.status).json(errObj.message);
+});
+
+app.listen(PORT, () => {
+  console.log(`Server started at port ${PORT}`);
+});
 
 module.exports = app;
+
+// const signupUser = async () => {
+//   const response = await fetch('/users/signup', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify({ username, password }),
+//   });
+//   const signedupUser = await response.json();
+// };
+// const loginUser = async () => {
+//   const response = await fetch('/users/login', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify({ username, password }),
+//   });
+//   const signedupUser = await response.json();
+// };
+// const getQuestions = async ()=>{
+
+//   const response = await fetch('/questions/')
+// }
