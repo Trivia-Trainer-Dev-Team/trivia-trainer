@@ -13,6 +13,7 @@ module.exports = {
     open: true,
     hot: true,
     liveReload: true,
+    historyApiFallback: true,
     proxy: {
       '/users/**': {
         target: 'http://localhost:3000/',
