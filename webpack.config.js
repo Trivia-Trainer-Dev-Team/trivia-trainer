@@ -1,40 +1,59 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
   mode: 'development',
   entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, 'public'),
     filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
   },
 
-  target: 'web',
   devServer: {
-    port: '3000',
-    static: ['./public'],
     open: true,
     hot: true,
     liveReload: true,
+    historyApiFallback: true,
     proxy: {
-      '/questions': 'http://localhost:3001',
+      '/users/**': {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
+      '/questions/**': {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
     },
   },
 
-  resolve: {
-    extensions: ['.js', '.jsx', '.json', '.ts'],
-  },
   module: {
     rules: [
+      // babel loaders
       {
-        test: /\.(js|jsx)$/,
+        test: /\.jsx?/,
         exclude: /node_modules/,
-        use: 'babel-loader',
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
+        },
       },
+      // css loaders
       {
-        test: /\.css$/,
-        exclude: /node_modules/,
+        test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
     ],
   },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: path.resolve(__dirname, './public/index.html'),
+    }),
+  ],
 };
