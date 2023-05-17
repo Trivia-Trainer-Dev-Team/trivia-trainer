@@ -15,7 +15,7 @@ apiController.retrieveData = async (req, res, next) => {
     }
     const url = `https://opentdb.com/api.php?amount=10&category=${number}&difficulty=medium&type=multiple`;
     fetch(url)
-    .then(reponse => response.json())
+    .then(response => response.json())
     .then(data =>{
       console.log('this is the result array' + data.results);
       res.locals.results = data.results;
