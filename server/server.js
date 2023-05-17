@@ -29,7 +29,7 @@ app.post('/users/', userController.createUser, (req, res) => {
 });
 
 //handler for getting all questions from the api
-app.post('/questions/:category', apiController.retrieveData, (req, res) => {
+app.get('/questions/:category', apiController.retrieveData, (req, res) => {
   return res.status(200).json(res.locals.result);
 });
 

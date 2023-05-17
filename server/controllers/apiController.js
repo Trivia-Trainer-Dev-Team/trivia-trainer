@@ -19,8 +19,9 @@ apiController.retrieveData = async (req, res, next) => {
     .then(data =>{
       console.log('this is the result array' + data.results);
       res.locals.result = data.results;
+      return next();
     })
-    return next();
+
   } catch (err) {
     return next({
       log: 'An error occured in in apiController on retrieveData middleware function',
