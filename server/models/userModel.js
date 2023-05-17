@@ -6,15 +6,15 @@ const Schema = mongoose.Schema;
 
 
 const userSchema = new Schema ({
-   username: {type: String, required:true},
-   password: {type: Number, required: true},
+   username: {type: String, required:true, unique:true}, //don't want to have duplicate username
+   password: {type: String, required: true},
    name: {type: String, required: true},
    score: {type: Number, default: 0} //every person starts with a score of 0
 })
 
 
-userSchema.methods.increaseScore = function(numCorrectQuestions) {
-   this.score += numCorrectQuestions;
+userSchema.methods.increaseScore = function() {
+   this.score += 1;
    return this.save();
  };
 
