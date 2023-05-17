@@ -1,12 +1,12 @@
 const express = require('express');
 const app = express();
 const PORT = 3000;
-const userController = require('./');
+const userController = require('./controllers/userController.js');
 const apiController = require('./controllers/apiController.js');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 //MongoDB database
+
 const mongoose = require('mongoose');
 mongoose.connect(
   'mongodb+srv://Fabrizzio:Knicksarenumber1!@cluster0.my2wym6.mongodb.net/'
