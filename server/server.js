@@ -1,10 +1,19 @@
 const express = require('express');
 const app = express();
 const PORT = 3000;
-
+const userController = require('./');
 const apiController = require('./controllers/apiController.js');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+//MongoDB database
+const mongoose = require('mongoose');
+mongoose.connect(
+  'mongodb+srv://Fabrizzio:Knicksarenumber1!@cluster0.my2wym6.mongodb.net/'
+);
+mongoose.connection.once('open', () => {
+  console.log('Connected to Database');
+});
 
 //login handler
 app.get('/users/', userController.verifyUser, (req, res) => {
@@ -15,7 +24,7 @@ app.get('/users/', userController.verifyUser, (req, res) => {
   }
 });
 // signup handler
-app.post('/users/signup', userController.createUser, (req, res) => {
+app.post('/users/', userController.createUser, (req, res) => {
   return res.status(201).send(res.locals.user);
 });
 
@@ -44,28 +53,3 @@ app.listen(PORT, () => {
 });
 
 module.exports = app;
-
-// const signupUser = async () => {
-//   const response = await fetch('/users/signup', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify({ username, password }),
-//   });
-//   const signedupUser = await response.json();
-// };
-// const loginUser = async () => {
-//   const response = await fetch('/users/login', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify({ username, password }),
-//   });
-//   const signedupUser = await response.json();
-// };
-// const getQuestions = async ()=>{
-
-//   const response = await fetch('/questions/')
-// }
