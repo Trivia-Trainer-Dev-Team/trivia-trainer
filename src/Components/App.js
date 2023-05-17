@@ -11,6 +11,8 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from 'react-router-dom';
+import QuizPage from '../pages/QuizPage.jsx';
+import Home from '../pages/home.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
