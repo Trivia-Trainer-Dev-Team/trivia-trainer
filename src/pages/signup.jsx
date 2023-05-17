@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function PageContainer() {
+function SignupPage() {
   return (
     <div id='pageContainer'>
       <Logo id='logo' />
@@ -54,9 +54,10 @@ function LoginFeature() {
         },
         body: JSON.stringify({ username, password, name }),
       });
+      const data = await response.json();
 
       if (response.ok) {
-        navigate('/home');
+        navigate('/home', { state: { data } });
       }
     } catch (err) {
       console.log(err);
@@ -95,4 +96,4 @@ function LoginFeature() {
   );
 }
 
-export default PageContainer;
+export default SignupPage;
