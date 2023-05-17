@@ -34,6 +34,14 @@ app.get(
     }
   }
 );
+
+app.get('/users/cookie', userController.getUserFromCookie, (req, res) => {
+  if (res.locals.user) {
+    res.status(200).json(res.locals.user);
+  } else {
+    return res.status(204).json('Wrong credentials');
+  }
+});
 // signup handler
 app.post(
   '/users/',
