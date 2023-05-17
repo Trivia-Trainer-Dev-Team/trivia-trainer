@@ -1,4 +1,5 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const app = express();
 const PORT = 3000;
 
@@ -7,8 +8,8 @@ const apiController = require('./controllers/apiController.js');
 const sessionController = require('./controllers/sessionController.js');
 const cookieController = require('./controllers/cookieController.js');
 
-
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 //MongoDB database
 
@@ -29,9 +30,14 @@ app.get('/users/', userController.verifyUser, (req, res) => {
   }
 });
 // signup handler
-app.post('/users/', userController.createUser, cookieController.setSSIDCookie, (req, res) => {
-  return res.status(201).json(res.locals.user);
-});
+app.post(
+  '/users/',
+  userController.createUser,
+  cookieController.setSSIDCookie,
+  (req, res) => {
+    return res.status(201).json(res.locals.user);
+  }
+);
 
 //handler for getting all questions from the api
 app.get('/questions/:category', apiController.retrieveData, (req, res) => {
