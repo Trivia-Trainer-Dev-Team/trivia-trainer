@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function PageContainer() {
+function LoginPage() {
   return (
     <div id='pageContainer'>
       <Logo id='logo' />
@@ -83,4 +83,4 @@ function LoginFeature() {
   );
 }
 
-export default PageContainer;
+export default LoginPage;
