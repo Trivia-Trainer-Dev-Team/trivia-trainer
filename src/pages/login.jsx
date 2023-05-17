@@ -42,16 +42,19 @@ function LoginFeature() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/users', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
+      const response = await fetch(
+        `/users/?username=${username}&password=${password}`,
+        {
+          method: 'get',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      const data = await response.json();
 
       if (response.ok) {
-        navigate('/home');
+        navigate('/home', { state: { data } });
       }
     } catch (err) {
       console.log(err);
