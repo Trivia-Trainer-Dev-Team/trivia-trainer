@@ -10,6 +10,7 @@ cookieController.setSSIDCookie = async (req, res, next) => {
     await User.find({username})
     .then(response => response.json())
     .then(data =>{
+        console.log('found user. data is ' + data);
         res.locals.ssid = response[0]._id;
         res.cookie('ssid', res.locals.ssid, { httpOnly: true });
         return next();
@@ -22,3 +23,5 @@ cookieController.setSSIDCookie = async (req, res, next) => {
     });
   }
 }
+
+module.exports = cookieController;
