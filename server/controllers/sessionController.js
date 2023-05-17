@@ -39,8 +39,8 @@ const mongoose = require('mongoose');
 
     sessionController.deleteSession = async (req,res,next) =>{
         try{
+            await Session.remove({cookieId: req.cookies.cookieID})
             res.clearCookie(cookieId);
-            await Session.remove({cookieId: req.locals.ssid})
             return next();
         }
         catch (err) {
