@@ -12,7 +12,7 @@ module.exports = {
   devServer: {
     open: true,
     hot: true,
-    // liveReload: true,
+    liveReload: true,
     historyApiFallback: true,
     proxy: {
       '/users/**': {
