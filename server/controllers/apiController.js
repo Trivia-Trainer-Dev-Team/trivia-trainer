@@ -1,26 +1,25 @@
-const axios = require('axios');
+
 
 const apiController = {};
 apiController.retrieveData = async (req, res, next) => {
   try {
     console.log('Trying to retrieve data');
-    const { subject } = req.params;
+    const { category } = req.params;
     let number;
-    if (subject === 'Sports') {
+    if (category === 'Sports') {
       number = 21;
-    } else if (subject === 'Computers') {
+    } else if (category === 'Computers') {
       number = 18;
-    } else if (subject === 'Mathematics') {
+    } else if (category === 'Mathematics') {
       number = 19;
     }
     const url = `https://opentdb.com/api.php?amount=10&category=${number}&difficulty=medium&type=multiple`;
-    const response = await axios.get(url);
-    const data = response.data;
-    const result = data.result;
-
-    console.log("this is the result array " + result);
-
-    res.locals.result = result;
+    fetch(url)
+    .then(reponse => response.json())
+    .then(data =>{
+      console.log('this is the result array' + data.results);
+      res.locals.results = data.results;
+    })
     return next();
   } catch (err) {
     return next({
