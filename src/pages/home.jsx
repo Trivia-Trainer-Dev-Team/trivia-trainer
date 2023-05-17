@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 
 //------>Full Page<-----
 function HomeElement() {
@@ -36,9 +36,11 @@ function QuizElements() {
   return (
     <div id='Quizzes'>
       {elements.map((el, i) => {
-        <NavLink key={i} to={`/QuizPage/${el}`}>
-          <span>{el}</span>
-        </NavLink>;
+        return (
+          <NavLink key={i} to={`/quiz/${el}`}>
+            <span>{el}</span>
+          </NavLink>
+        );
       })}
     </div>
   );
@@ -48,33 +50,32 @@ function QuizElements() {
 
 //------->Center Element<--------
 function UserContainer() {
-const [name, setName] = useState('');
-const [right, setRight] = useState('');
+  const [name, setName] = useState('');
+  const [right, setRight] = useState('');
 
-// useEffect(()=>{
-//     const retrieveUserData = async() =>{
-//         try {
-//             const response = await fetch('/users');
-//             const data = await response.json();
-//             const {questionsRight, name} = data;
-//             setName(name);
-//             setRight(questionsRight);
-//         } catch (err){
-//             console.log(err);
-//         }
-//     }
-// })
-
+  // useEffect(()=>{
+  //     const retrieveUserData = async() =>{
+  //         try {
+  //             const response = await fetch('/users');
+  //             const data = await response.json();
+  //             const {questionsRight, name} = data;
+  //             setName(name);
+  //             setRight(questionsRight);
+  //         } catch (err){
+  //             console.log(err);
+  //         }
+  //     }
+  // })
 
   return (
     <div>
-      <CenterUserData right={right}/>
-      <UserNav name={name}/>
+      <CenterUserData right={right} />
+      <UserNav name={name} />
     </div>
   );
 }
 
-function CenterUserData({right}) {
+function CenterUserData({ right }) {
   return (
     <div>
       {/* These will be used as get requests later on. */}
@@ -86,11 +87,11 @@ function CenterUserData({right}) {
 
 //------->Center/Right Element<--------
 
-function UserNav({name}) {
+function UserNav({ name }) {
   return (
     <div>
       <UserImage />
-      <UserBody name={name}/>
+      <UserBody name={name} />
     </div>
   );
 }
@@ -99,7 +100,7 @@ function UserImage() {
   return <img src='#'></img>;
 }
 
-function UserBody({name}) {
+function UserBody({ name }) {
   return <p>{name}</p>;
 }
 
