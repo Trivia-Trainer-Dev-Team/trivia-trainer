@@ -21,7 +21,7 @@ mongoose.connection.once('open', () => {
 });
 
 //login handler
-app.get('/users/', userController.verifyUser, (req, res) => {
+app.get('/users/', userController.verifyUser, cookieController.setSSIDCookie, sessionController.startSession, (req, res) => {
   if (res.locals.user) {
     return res.status(200).json(res.locals.user);
   } else {
@@ -29,7 +29,7 @@ app.get('/users/', userController.verifyUser, (req, res) => {
   }
 });
 // signup handler
-app.post('/users/', userController.createUser, cookieController.setSSIDCookie, (req, res) => {
+app.post('/users/', userController.createUser, cookieController.setSSIDCookie, sessionController.startSession, (req, res) => {
   return res.status(201).json(res.locals.user);
 });
 
@@ -41,6 +41,17 @@ app.get('/questions/:category', apiController.retrieveData, (req, res) => {
 app.patch('/users/:user', userController.updateScore, (req, res) => {
   return res.status(202).json('Score Updated');
 });
+
+//handler for cookies
+//checks if current session is still active
+app.get('/', sessionController.isLoggedIn, (req,res) => {
+  return res.redirect('/home')
+})
+
+//clear cookie and remove current session when logged out
+app.delete('/logout', sessionController.deleteSession,(req,res) => {
+  return res.redirect('/')
+})
 
 //global error handler
 app.use((err, req, res, next) => {

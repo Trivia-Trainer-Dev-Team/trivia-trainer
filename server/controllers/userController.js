@@ -34,8 +34,6 @@ userController.createUser = async (req, res, next) => {
 };
 
 
-
-
 //USER LOGIN
 userController.verifyUser = async (req, res, next) => {
    const { username, password } = req.query; //all we need is these two to login
