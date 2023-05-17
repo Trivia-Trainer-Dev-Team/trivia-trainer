@@ -62,7 +62,6 @@ userController.verifyUser = async (req, res, next) => {
      }
 }
 
-
 userController.updateScore = async (req, res, next) => {
    const { username } = req.params; //When you finish the quiz, it should send over the username of the person and the #of correct questions
    try {
@@ -87,4 +86,48 @@ userController.updateScore = async (req, res, next) => {
    }
  };
 
-module.exports = userController;
+
+userController.deleteUser = async (req, res, next) => {
+  const { username } = req.params;
+  try {
+    const deleted = User.findOneAndDelete({username});
+    if(deleted){
+      console.log('The user has been deleted');
+      return next()
+    }
+  }
+  catch (error) {
+    return next({
+      log: 'Error occurred in userController.deleteUser',
+      status: 400,
+      message: { err: 'An error occurred in deleteUser' },
+  });
+  }
+}
+
+userController.resetScore = async (req, res, next) => {
+  const { username } = req.params;
+  try {
+    const user = User.findOne({username});
+    if (!user) {
+      return next({
+        log: 'Error occurred in userController.resetScore',
+        status: 400,
+        message: { err: 'An error occurred in the resetScore' },
+      })
+    }
+    user.score = 0;
+    res.locals.resetScore = user.score
+    await user.save();
+    return next();
+  }
+  catch (error) {
+    return next({
+      log: 'Error occurred in userController.deleteUser',
+      status: 400,
+      message: { err: 'An error occurred in deleteUser' },
+    });
+  }
+}
+
+module.exports = userController
