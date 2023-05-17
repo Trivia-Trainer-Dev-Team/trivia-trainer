@@ -36,7 +36,7 @@ app.get(
 );
 // signup handler
 app.post(
-  '/users/',
+  '/users/',userController.hashpassword,
   userController.createUser,
   cookieController.setSSIDCookie,
   (req, res) => {
@@ -52,6 +52,17 @@ app.get('/questions/:category', apiController.retrieveData, (req, res) => {
 app.patch('/users/', userController.updateScore, (req, res) => {
   return res.status(202).json('Score Updated');
 });
+
+//handler for cookies
+//checks if current session is still active
+app.get('/', sessionController.isLoggedIn, (req,res) => {
+  return res.redirect('/home')
+})
+
+//clear cookie and remove current session when logged out
+app.delete('/logout', sessionController.deleteSession,(req,res) => {
+  return res.redirect('/')
+})
 
 //global error handler
 app.use((err, req, res, next) => {
