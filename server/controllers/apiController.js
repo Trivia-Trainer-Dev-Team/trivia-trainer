@@ -18,7 +18,7 @@ apiController.retrieveData = async (req, res, next) => {
     .then(response => response.json())
     .then(data =>{
       console.log('this is the result array' + data.results);
-      res.locals.results = data.results;
+      res.locals.result = data.results;
     })
     return next();
   } catch (err) {
