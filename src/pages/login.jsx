@@ -26,7 +26,7 @@ function LoginContainer() {
   );
 }
 
-function LoginFeature() {
+export function LoginFeature() {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -85,5 +85,4 @@ function LoginFeature() {
     </div>
   );
 }
-
 export default LoginPage;
