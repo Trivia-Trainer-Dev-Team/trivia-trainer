@@ -52,7 +52,7 @@ function LoginFeature() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, password, name }),
       });
 
       if (response.ok) {
