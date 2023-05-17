@@ -49,7 +49,7 @@ app.get('/questions/:category', apiController.retrieveData, (req, res) => {
   return res.status(200).json(res.locals.result);
 });
 
-app.patch('/users/:user', userController.updateScore, (req, res) => {
+app.patch('/users/', userController.updateScore, (req, res) => {
   return res.status(202).json('Score Updated');
 });
 
