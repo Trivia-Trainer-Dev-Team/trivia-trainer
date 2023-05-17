@@ -3,24 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
   return (
-    <div id='pageContainer'>
-      <Logo id='logo' />
-      <LoginContainer />
-    </div>
-  );
-}
-
-function Logo() {
-  return (
-    <div id='logo'>
-      <h1>Login Page</h1>
-    </div>
-  );
-}
-
-function LoginContainer() {
-  return (
-    <div id='get'>
+    <div id="pageContainer">
       <LoginFeature />
     </div>
   );
@@ -62,26 +45,40 @@ export function LoginFeature() {
   };
 
   return (
-    <div id='forms'>
-      <h2>Welcome Back!</h2>
-      <p>Username</p>
-      <input
-        type='text'
-        value={username}
-        onChange={usernameChangeEvent}
-        className='textField'
-      ></input>
-      <p>Password</p>
-      <input
-        type='password'
-        value={password}
-        onChange={passwordChangeEvent}
-        className='textField'
-      ></input>
-      <form onSubmit={handleLogin}>
-        <input type='submit' value='Login' className='button'></input>
-      </form>
-      <a href='/signup'>Click Here To Sign Up!</a>
+    <div id="forms">
+      <div id="titles">
+        <h1 id="page-title">Login Page</h1>
+        <h2 id="welcome">Welcome Back!</h2>
+      </div>
+      <div className="inputFields">
+        <input
+          type="text"
+          value={username}
+          onChange={usernameChangeEvent}
+          placeholder="Username"
+          className="textField"
+        ></input>
+        <input
+          type="password"
+          value={password}
+          onChange={passwordChangeEvent}
+          placeholder="Password"
+          className="textField"
+        ></input>
+      </div>
+      <div id="buttonHolder">
+        <form onSubmit={handleLogin}>
+          <input
+            id="login-button"
+            type="submit"
+            value="Login"
+            className="primary-button"
+          ></input>
+        </form>
+        <a id="signup-button" href="/signup">
+          <button className="secondary-button">Create Account</button>
+        </a>
+      </div>
     </div>
   );
 }
