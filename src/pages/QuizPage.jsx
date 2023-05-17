@@ -33,26 +33,62 @@ function QuizPage() {
 
   useEffect(() => {
     if (quizList.length > 0) {
-      setCurrQuestion(quizList[index]);
+      console.log('quizList:', quizList);
+      console.log('index:', index);
+      const currentQuestion = quizList[index];
+      console.log('currentQuestion:', currentQuestion);
+      const { correct_answer, incorrect_answers } = currentQuestion;
+
+      // Shuffle the answer choices
+      const shuffledAnswers = shuffle([correct_answer, ...incorrect_answers]);
+
+      setCurrQuestion({
+        ...currentQuestion,
+        answers: shuffledAnswers,
+      });
     }
   }, [quizList, index]);
 
+  //helper functions
   const decodeHTML = (html) => {
     const textarea = document.createElement('textarea');
     textarea.innerHTML = html;
     return textarea.value;
   };
 
+  function shuffle(array) {
+    let currentIndex = array.length,
+      randomIndex;
+
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex],
+        array[currentIndex],
+      ];
+    }
+
+    return array;
+  }
+
   const answerSubmission = (event) => {
     const answer = event.target.value;
-    setIndex((prevIndex) => prevIndex + 1);
+    const nextIndex = index + 1;
 
     if (answer === currQuestion.correct_answer) {
       setQuizScore((prevScore) => prevScore + 1);
     }
 
-    if (index + 1 >= quizList.length) {
+    if (nextIndex >= quizList.length) {
       setQuizEnd(true);
+      fetch('/users');
+    } else {
+      setIndex(nextIndex);
     }
   };
 
@@ -66,13 +102,11 @@ function QuizPage() {
             <div>{quizScore}</div>
           ) : (
             <>
-              <div>{currQuestion && decodeHTML(currQuestion.question)}</div>
-              <button
-                onClick={answerSubmission}
-                value={currQuestion.correct_answer}
-              >
-                Submit Answer
-              </button>
+              <QuizCard
+                question={currQuestion}
+                answerSubmit={answerSubmission}
+                decodeHTML={decodeHTML}
+              />
             </>
           )}
         </div>
@@ -80,5 +114,21 @@ function QuizPage() {
     </>
   );
 }
+
+const QuizCard = ({ question, answerSubmit, decodeHTML }) => {
+  const { question: encodedQuestion, answers } = question;
+
+  return (
+    <div>
+      <div>{decodeHTML(encodedQuestion)}</div>
+      {answers &&
+        answers.map((answer, index) => (
+          <button key={index} onClick={answerSubmit} value={answer}>
+            {answer}
+          </button>
+        ))}
+    </div>
+  );
+};
 
 export default QuizPage;
