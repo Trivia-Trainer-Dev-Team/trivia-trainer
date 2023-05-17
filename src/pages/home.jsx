@@ -1,12 +1,16 @@
 import React, { Component, useEffect, useState } from 'react';
-import { useNavigate, NavLink } from 'react-router-dom';
+import { useNavigate, NavLink, useLocation } from 'react-router-dom';
 
 //------>Full Page<-----
 function HomeElement() {
+  const location = useLocation();
+  const { data } = location.state;
+  console.log(data);
+
   return (
     <div id='fullHomepage'>
       <QuizSelectionBar />
-      <UserContainer />
+      <UserContainer name={data.name} />
     </div>
   );
 }
@@ -49,23 +53,8 @@ function QuizElements() {
 //------->Left Nav Bar<-------
 
 //------->Center Element<--------
-function UserContainer() {
-  const [name, setName] = useState('');
+function UserContainer({ name }) {
   const [right, setRight] = useState('');
-
-  // useEffect(()=>{
-  //     const retrieveUserData = async() =>{
-  //         try {
-  //             const response = await fetch('/users');
-  //             const data = await response.json();
-  //             const {questionsRight, name} = data;
-  //             setName(name);
-  //             setRight(questionsRight);
-  //         } catch (err){
-  //             console.log(err);
-  //         }
-  //     }
-  // })
 
   return (
     <div>
