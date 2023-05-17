@@ -1,20 +1,43 @@
 {
+  "root": true,
   "env": {
+    "node": true,
     "browser": true,
     "es2021": true,
-    "node": true
+    "jest": true
   },
-  "extends": ["plugin:react/recommended", "airbnb"],
-  "overrides": [],
+  "plugins": ["import", "react", "jsx-a11y", "css-modules"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:css-modules/recommended"
+  ],
   "parserOptions": {
-    "ecmaVersion": "latest",
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
-  "plugins": ["react"],
   "rules": {
-    "no-console": "off",
-    "quotes": ["error", "prefer-single"],
-    "jsx-quotes": ["error", "prefer-double"]
-    
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "indent": ["warn", 2],
+    "no-unused-vars": ["off", { "vars": "local" }],
+    "prefer-const": "warn",
+    "quotes": ["warn", "single"],
+    "semi": ["warn", "always"],
+    "space-infix-ops": "warn"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".css"]
+      }
+    }
   }
 }
