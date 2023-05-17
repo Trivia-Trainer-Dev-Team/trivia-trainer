@@ -1,3 +1,39 @@
 @import 'home-page.scss';
-@import 'login-signup.scss';
+@import 'login.scss';
+@import './signup.scss';
 @import 'question-card.scss';
+
+$base-color1: #0b2447;
+$base-color2: #212a3e;
+$border-dark: rgba($base-color1, 0.88);
+$primary-color1: #19376d;
+$primary-color2: #394867;
+$secondary-color1: #576cbc;
+$secondary-color2: #9ba4b5;
+$text-color1: #f1f6f9;
+$text-color2: #a5d7e8;
+
+$border-radius: 8px;
+$marginTop: 50px;
+
+.textField {
+  width: 100%;
+  height: 5vh;
+  border-radius: $border-radius;
+  font-size: large;
+}
+
+.primary-button {
+  width: 40vw;
+  background-color: $text-color2;
+  border-color: $text-color1;
+  border-radius: $border-radius;
+  font-size: medium;
+}
+
+.secondary-button {
+  background-color: $primary-color1;
+  color: rgba($text-color1, 0.68);
+  border-radius: $border-radius;
+  border: 1px solid rgba($text-color1, 0.68);
+}

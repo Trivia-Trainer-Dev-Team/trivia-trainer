@@ -12,7 +12,7 @@ module.exports = {
   devServer: {
     open: true,
     hot: true,
-    liveReload: true,
+    // liveReload: true,
     historyApiFallback: true,
     proxy: {
       '/users/**': {
@@ -42,6 +42,7 @@ module.exports = {
       // css loaders
       {
         test: /scss/,
+        exclude: /node_modules/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],
