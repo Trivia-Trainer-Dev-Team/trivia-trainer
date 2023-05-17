@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
 const User = require('../models/userModel.js');
 
-
 const userController = {};
-
 
 //USER SIGN UP -
 userController.createUser = async (req, res, next) => {
@@ -32,9 +30,6 @@ userController.createUser = async (req, res, next) => {
        });
    }
 };
-
-
-
 
 //USER LOGIN
 userController.verifyUser = async (req, res, next) => {
@@ -92,7 +87,4 @@ userController.updateScore = async (req, res, next) => {
    }
  };
 
-
-
-
-module.exports = userController
+module.exports = userController;

@@ -54,9 +54,10 @@ function LoginFeature() {
         },
         body: JSON.stringify({ username, password, name }),
       });
+      const data = await response.json();
 
       if (response.ok) {
-        navigate('/home');
+        navigate('/home', { state: { data } });
       }
     } catch (err) {
       console.log(err);
