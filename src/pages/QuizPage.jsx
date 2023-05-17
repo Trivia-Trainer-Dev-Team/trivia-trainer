@@ -1,47 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 function QuizPage() {
-  // quizGenre is the category of
   const { genre } = useParams();
+
   // create state object for entire list of quiz questions
   // create state for current quiz question object
   const [quizList, setQuizList] = useState([]);
   const [currQuestion, setCurrQuestion] = useState({});
   const [quizScore, setQuizScore] = useState(0);
+
   // create generic index variable to track moving through the quiz array
   let index = 0;
-  // fetch request to server for list of quiz questions based on quiz category type on page load
-  // sets the state of entire quiz list and sets current question to first element of list
-  const fetchQuizList = async () => {
-    try {
-      const response = await fetch(`/questions/${quizGenre}`);
-      const data = response.json();
-      if (response.ok) {
-        setQuizList(data);
-        setCurrQuestion(quizList[index]);
-      }
-      return;
-    } catch (err) {
-      return `Error fetching quiz list in QuizPage.jsx. Error: ${err}`;
-    }
-  };
-
-  const updateUserScore = async () => {
-    // put request to user's datbase profile that updates their lifetime score
-    // *** UNFINISHED FETCH REQUEST ***
-    //   try {
-    //     const response = await fetch('/users', {
-    //       method: 'PUT',
-    //       headers: {
-    //         'Content-Type': 'application/json'
-    //       },
-    //       body: JSON.stringify(1)
-    //     })
-    //   } catch (err) {
-    //     return `Error sending put request to server in QuizPage.jsx. Error: ${err}`
-    //   }
-  };
 
   // universal function to handle button clicks from any quiz answer choice
   const answerSubmission = (event) => {
@@ -49,23 +19,36 @@ function QuizPage() {
     const answer = event.target.value;
     // if the data matches the real answer, update quizScore and userScore state
     if (answer === currQuestion.correct_answer) {
-      setQuizScore((prevState) => {
-        prevState += 1;
-      });
+      setQuizScore((prevState) => (prevState += 1));
       updateUserScore();
     }
   };
   // set currentQuestion to the quizList[++index]
   // render a quiz question from currentQuestion information
+  useEffect(async () => {
+    try {
+      const response = await fetch(`/questions/${quizGenre}`);
+      const data = await response.json();
+      if (response.ok) {
+        setQuizList(data);
+        setCurrQuestion(data[index]);
+      }
+      return;
+    } catch (err) {
+      return `Error fetching quiz list in QuizPage.jsx. Error: ${err}`;
+    }
+  }, []);
 
   return (
     <div id='question-card'>
       <div id='question-header'>{currQuestion.question}</div>
       <div id='question-body'>
-        <button id='answer1'>{currQuestion.correct_answer}</button>
-        <button id='answer2'>{currQuestion.incorrect_answers[0]}</button>
-        <button id='answer3'>{currQuestion.incorrect_answers[1]}</button>
-        <button id='answer4'>{currQuestion.incorrect_answers[2]}</button>
+        <button id='answer1' onClick={answerSubmission}>
+          {currQuestion.correct_answer}
+        </button>
+        <button id='answer2' onClick={answerSubmission}>
+          {currQuestion.incorrect_answers}
+        </button>
       </div>
       <div id='question-footer'>
         <button id='quit-question'>Quit</button>
