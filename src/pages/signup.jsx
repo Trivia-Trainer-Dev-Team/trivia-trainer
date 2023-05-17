@@ -13,7 +13,7 @@ function PageContainer() {
 function Logo() {
   return (
     <div id='logo'>
-      <h1>GameTraits</h1>
+      <h1>Sign Up!</h1>
     </div>
   );
 }
@@ -30,6 +30,7 @@ function LoginFeature() {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
 
   const usernameChangeEvent = (event) => {
     setUsername(event.target.value);
@@ -37,6 +38,10 @@ function LoginFeature() {
 
   const passwordChangeEvent = (event) => {
     setPassword(event.target.value);
+  };
+
+  const nameChangeEvent = (event) => {
+    setName(event.target.value);
   };
 
   const signUpHandler = async (e) => {
@@ -73,6 +78,13 @@ function LoginFeature() {
         type='password'
         value={password}
         onChange={passwordChangeEvent}
+        className='textField'
+      ></input>
+      <p>Full name</p>
+      <input
+        type='name'
+        value={name}
+        onChange={nameChangeEvent}
         className='textField'
       ></input>
       <form onSubmit={signUpHandler}>
