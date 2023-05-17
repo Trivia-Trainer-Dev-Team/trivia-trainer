@@ -35,7 +35,7 @@ userController.createUser = async (req, res, next) => {
 //USER LOGIN
 userController.verifyUser = async (req, res, next) => {
   const { username, password } = req.query; //all we need is these two to login
-  console.log(req.body);
+  console.log(req.query);
   if (!username || !password) {
     return next({
       log: 'Error occurred in userController.verifyUser',
@@ -83,9 +83,33 @@ userController.updateScore = async (req, res, next) => {
     }
   } catch (error) {
     return next({
-      log: 'Error occurred in userController.updateScore',
+      log: 'Error occurred in userController.deleteUser',
       status: 400,
-      message: { err: 'An error occurred' },
+      message: { err: 'An error occurred in deleteUser' },
+    });
+  }
+};
+
+userController.resetScore = async (req, res, next) => {
+  const { username } = req.params;
+  try {
+    const user = User.findOne({ username });
+    if (!user) {
+      return next({
+        log: 'Error occurred in userController.resetScore',
+        status: 400,
+        message: { err: 'An error occurred in the resetScore' },
+      });
+    }
+    user.score = 0;
+    res.locals.resetScore = user.score;
+    await user.save();
+    return next();
+  } catch (error) {
+    return next({
+      log: 'Error occurred in userController.deleteUser',
+      status: 400,
+      message: { err: 'An error occurred in deleteUser' },
     });
   }
 };
