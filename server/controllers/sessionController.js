@@ -39,12 +39,11 @@ const mongoose = require('mongoose');
 
     sessionController.deleteSession = async (req,res,next) =>{
         try{
-            await Session.remove({cookieId: req.locals.ssid})
+            await Session.remove({cookieId: req.cookies.cookieID})
+            res.clearCookie(cookieId);
             return next();
         }
         catch (err) {
-            // If there is an error, redirect to the sign-up page.
-            // res.redirect(...)
             console.log(err);
           }
     };
