@@ -5,9 +5,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom'
-import { BrowserRouter, MemoryRouter } from 'react-router-dom';
+import { BrowserRouter, MemoryRouter, Route, Routes } from 'react-router-dom';
 import HomeElement from '../src/pages/home';
-import PageContainer from '../src/pages/login';
+import LoginPage from '../src/pages/login';
 import QuizPage from '../src/pages/QuizPage';
 
 // xdescribe('tests the QuizPage component ', () => {
@@ -25,7 +25,13 @@ import QuizPage from '../src/pages/QuizPage';
 // });
 
 test('expects login page to have username and password fields', async () => {
-  render(<PageContainer />);
+  render(
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
 
   const inputLabels = await screen.findAllByRole('p');
   expect(inputLabels[0]).toHaveTextContent('Username');
