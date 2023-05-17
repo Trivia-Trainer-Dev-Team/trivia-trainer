@@ -27,27 +27,30 @@ function QuizPage() {
   // render a quiz question from currentQuestion information
   useEffect(async () => {
     try {
-      const response = await fetch(`/questions/${quizGenre}`);
+      const response = await fetch(`/questions/${genre}`);
       const data = await response.json();
       if (response.ok) {
         setQuizList(data);
-        setCurrQuestion(quizList[index]);
       }
-      return;
+      console.log(quizList);
     } catch (err) {
       return `Error fetching quiz list in QuizPage.jsx. Error: ${err}`;
     }
-  }, []);
+  });
+
+  // useEffect(() => {
+  //   setCurrQuestion(quizList[index]);
+  // }, [quizList]);
 
   return (
     <div id='question-card'>
-      <div id='question-header'>{currQuestion.question}</div>
+      <div id='question-header'>{currQuestion?.question}</div>
       <div id='question-body'>
         <button id='answer1' onClick={answerSubmission}>
-          {currQuestion.correct_answer}
+          {currQuestion?.correct_answer}
         </button>
         <button id='answer2' onClick={answerSubmission}>
-          {currQuestion.incorrect_answers}
+          {currQuestion?.incorrect_answers}
         </button>
       </div>
       <div id='question-footer'>
