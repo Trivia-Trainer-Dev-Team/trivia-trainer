@@ -36,7 +36,7 @@ app.get(
 );
 // signup handler
 app.post(
-  '/users/',
+  '/users/',userController.hashpassword,
   userController.createUser,
   cookieController.setSSIDCookie,
   (req, res) => {
