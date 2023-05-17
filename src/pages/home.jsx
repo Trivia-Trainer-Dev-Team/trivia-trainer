@@ -36,9 +36,11 @@ function QuizElements() {
   return (
     <div id='Quizzes'>
       {elements.map((el, i) => {
-        <NavLink key={i} to={`/QuizPage/${el}`}>
-          <span>{el}</span>
-        </NavLink>;
+        return (
+          <NavLink key={i} to={`/quiz/${el}`}>
+            <span>{el}</span>
+          </NavLink>
+        );
       })}
     </div>
   );
