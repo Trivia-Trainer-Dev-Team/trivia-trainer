@@ -8,13 +8,16 @@ import {
   Route,
   createRoutesFromElements,
   RouterProvider,
+  NavLink,
 } from 'react-router-dom';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path='/home' element={<Home />} />
-      <Route path='/quizPage/:quizGenre' element={<QuizPage />} />
+      <Route path='/quizPage'>
+        <Route path=':genre' element={<QuizPage />} />
+      </Route>
     </Route>
   )
 );

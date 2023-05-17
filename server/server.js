@@ -18,18 +18,18 @@ mongoose.connection.once('open', () => {
 //login handler
 app.get('/users/', userController.verifyUser, (req, res) => {
   if (res.locals.user) {
-    return res.status(200).send(res.locals.user);
+    return res.status(200).json(res.locals.user);
   } else {
-    return res.status(204).send('Wrong credentials');
+    return res.status(204).json('Wrong credentials');
   }
 });
 // signup handler
 app.post('/users/', userController.createUser, (req, res) => {
-  return res.status(201).send(res.locals.user);
+  return res.status(201).json(res.locals.user);
 });
 
 //handler for getting all questions from the api
-app.post('/questions/:category', apiController.retrieveData, (req, res) => {
+app.get('/questions/:category', apiController.retrieveData, (req, res) => {
   return res.status(200).json(res.locals.result);
 });
 
