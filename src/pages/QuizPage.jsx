@@ -105,7 +105,7 @@ function QuizPage() {
       ) : (
         <div id='question-card'>
           {quizEnd ? (
-            <div>{quizScore}</div>
+            <Congratulations correct={quizScore} />
           ) : (
             <>
               <QuizCard
@@ -133,6 +133,14 @@ const QuizCard = ({ question, answerSubmit, decodeHTML }) => {
             {answer}
           </button>
         ))}
+    </div>
+  );
+};
+
+const Congratulations = ({ correct }) => {
+  return (
+    <div>
+      <div>Congratulations! You got {correct} correct!</div>
     </div>
   );
 };
