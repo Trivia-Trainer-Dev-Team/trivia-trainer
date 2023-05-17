@@ -71,7 +71,7 @@ userController.updateScore = async (req, res, next) => {
     const { correctAnswer } = req.body;
     const user = await User.findOne({ _id: ssid });
     if (user) {
-      await user.increaseScore();
+      await user.increaseScore(correctAnswer);
       const updatedScore = { score: user.score }; //needs to send this cookies
       return next();
     } else {

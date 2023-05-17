@@ -13,8 +13,8 @@ const userSchema = new Schema ({
 })
 
 
-userSchema.methods.increaseScore = function() {
-   this.score += 1;
+userSchema.methods.increaseScore = function(num) {
+   this.score += num;
    return this.save();
  };
 
