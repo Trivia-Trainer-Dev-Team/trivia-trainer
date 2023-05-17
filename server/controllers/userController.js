@@ -34,7 +34,7 @@ userController.createUser = async (req, res, next) => {
 //USER LOGIN
 userController.verifyUser = async (req, res, next) => {
    const { username, password } = req.query; //all we need is these two to login
-   console.log(req.body)
+   console.log(req.query)
    if (!username || !password) {
        return next({
            log: 'Error occurred in userController.verifyUser',
@@ -61,7 +61,6 @@ userController.verifyUser = async (req, res, next) => {
        });
      }
 }
-
 
 userController.updateScore = async (req, res, next) => {
    const { ssid } = req.cookies; //When you finish the quiz, it should send over the username of the person and the #of correct questions
