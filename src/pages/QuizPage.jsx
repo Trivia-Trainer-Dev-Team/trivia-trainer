@@ -76,7 +76,7 @@ function QuizPage() {
     return array;
   }
 
-  const answerSubmission = (event) => {
+  const answerSubmission = async (event) => {
     const answer = event.target.value;
     const nextIndex = index + 1;
 
@@ -86,7 +86,13 @@ function QuizPage() {
 
     if (nextIndex >= quizList.length) {
       setQuizEnd(true);
-      fetch('/users');
+      fetch('/users', {
+        method: 'patch',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ correctAnswer: quizScore }),
+      });
     } else {
       setIndex(nextIndex);
     }
