@@ -7,7 +7,7 @@ cookieController.setSSIDCookie = async (req, res, next) => {
     const {username} = req.params;
     try{
     console.log('attempting to find username in cookiecontroller')
-    User.find({username})
+    await User.find({username})
     .then(response => response.json())
     .then(data =>{
         res.locals.ssid = response[0]._id;
