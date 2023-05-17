@@ -25,7 +25,7 @@ app.get('/users/', userController.verifyUser, (req, res) => {
 });
 // signup handler
 app.post('/users/', userController.createUser, (req, res) => {
-  return res.status(201).send(res.locals.user);
+  return res.status(201).json(res.locals.user);
 });
 
 //handler for getting all questions from the api
