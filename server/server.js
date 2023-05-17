@@ -1,8 +1,13 @@
 const express = require('express');
 const app = express();
 const PORT = 3000;
+
 const userController = require('./controllers/userController.js');
 const apiController = require('./controllers/apiController.js');
+const sessionController = require('./controllers/sessionController.js');
+const cookieController = require('./controllers/cookieController.js');
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //MongoDB database
@@ -24,7 +29,7 @@ app.get('/users/', userController.verifyUser, (req, res) => {
   }
 });
 // signup handler
-app.post('/users/', userController.createUser, (req, res) => {
+app.post('/users/', userController.createUser, cookieController.setSSIDCookie, (req, res) => {
   return res.status(201).json(res.locals.user);
 });
 

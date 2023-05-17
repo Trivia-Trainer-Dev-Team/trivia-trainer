@@ -10,7 +10,7 @@ userController.createUser = async (req, res, next) => {
     return next({
       log: 'Error occurred in userController.createUser',
       status: 400,
-      message: { err: 'An error occurred' },
+      message: { err: 'An error occurred userController.createUser' },
     });
   }
   try {
@@ -27,7 +27,7 @@ userController.createUser = async (req, res, next) => {
     return next({
       log: 'Error occurred in userController.createUser',
       status: 400,
-      message: { err: 'An error occurred' },
+      message: { err: 'An error occurred in userController.createUser' },
     });
   }
 };
