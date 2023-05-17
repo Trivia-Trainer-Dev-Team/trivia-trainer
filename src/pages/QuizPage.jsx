@@ -31,7 +31,7 @@ function QuizPage() {
       const data = await response.json();
       if (response.ok) {
         setQuizList(data);
-        setCurrQuestion(data[index]);
+        setCurrQuestion(quizList[index]);
       }
       return;
     } catch (err) {
