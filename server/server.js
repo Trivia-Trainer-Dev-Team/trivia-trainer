@@ -22,13 +22,18 @@ mongoose.connection.once('open', () => {
 });
 
 //login handler
-app.get('/users/', userController.verifyUser, cookieController.setSSIDCookie, sessionController.startSession, (req, res) => {
-  if (res.locals.user) {
-    return res.status(200).json(res.locals.user);
-  } else {
-    return res.status(204).json('Wrong credentials');
+app.get(
+  '/users/',
+  userController.verifyUser,
+  cookieController.setSSIDCookie,
+  (req, res) => {
+    if (res.locals.user) {
+      return res.status(200).json(res.locals.user);
+    } else {
+      return res.status(204).json('Wrong credentials');
+    }
   }
-});
+);
 // signup handler
 app.post(
   '/users/',
