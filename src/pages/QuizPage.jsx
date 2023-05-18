@@ -182,7 +182,7 @@ const AnswerFeedback = ({ correctAnswer, resetShowFeedback }) => {
       <div id="feedbackMessage">
         {correctAnswer ? (<h1>Correct! :)</h1>) : (<h1>Incorrect :(</h1>)}
       </div>
-      <button id="answerFeedbackButton" onClick={() => resetShowFeedback}>
+      <button id="answerFeedbackButton" onClick={() => resetShowFeedback()}>
         OK
       </button>
     </div>
