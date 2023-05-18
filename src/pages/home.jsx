@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState } from 'react';
 import { useNavigate, NavLink, useLocation, Navigate } from 'react-router-dom';
-
+import '../stylings/home-page.scss';
 //------>Full Page<-----
 function HomeElement() {
   const location = useLocation();
@@ -10,8 +10,12 @@ function HomeElement() {
 
   return (
     <div id='fullHomepage'>
-      <QuizSelectionBar />
-      <UserContainer name={data.name} score={data.score} />
+      <div className='quizSection'>
+        <QuizSelectionBar />
+      </div>
+      <div className='userSection'>
+        <UserContainer name={data.name} score={data.score} />
+      </div>
     </div>
   );
 }
@@ -29,7 +33,7 @@ function QuizSelectionBar() {
 function QuizTitle() {
   return (
     <div id='QuizTitle'>
-      <h3>This is the title</h3>
+      <h3>Choose Category</h3>
     </div>
   );
 }
@@ -43,7 +47,7 @@ function QuizElements() {
       {elements.map((el, i) => {
         return (
           <NavLink key={i} to={`/quiz/${el}`}>
-            <span>{el}</span>
+            <button>{el}</button>
           </NavLink>
         );
       })}
@@ -58,7 +62,7 @@ function UserContainer({ name, score }) {
   const [right, setRight] = useState('');
 
   return (
-    <div>
+    <div className='userHolder'>
       <CenterUserData score={score} />
       <UserNav name={name} />
     </div>
@@ -67,10 +71,12 @@ function UserContainer({ name, score }) {
 
 function CenterUserData({ score }) {
   return (
-    <div>
+    <div className='center'>
       {/* These will be used as get requests later on. */}
-      <span>{score}</span>
-      <h5>Questions Correct</h5>
+      <div className='correctSection'>
+        <h3>Questions Correct</h3>
+        <span>{score}</span>
+      </div>
     </div>
   );
 }
@@ -94,10 +100,14 @@ function UserNav({ name }) {
   };
 
   return (
-    <div>
-      <UserImage />
-      <UserBody name={name} />
-      <button onClick={logOut}>Log Out!</button>
+    <div className='userNav'>
+      <div className='userInfo'>
+        <UserImage />
+        <UserBody name={name} />
+      </div>
+      <button id='logoutBtn' className='secondary-button' onClick={logOut}>
+        Log Out
+      </button>
     </div>
   );
 }
