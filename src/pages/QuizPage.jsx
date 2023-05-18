@@ -133,7 +133,7 @@ function QuizPage() {
       {loading ? (
         <div>...Data Loading...</div>
       ) : (
-        <div id="question-card">
+        <div id='question-card'>
           {quizEnd ? (
             <Congratulations correct={quizScore} goBackFunc={goBack} />
           ) : (
@@ -147,7 +147,7 @@ function QuizPage() {
           )}
         </div>
       )}
-      <div id="feedbackModal">
+      <div id='feedbackModal'>
         {showAnswerFeedback ? (
           <AnswerFeedback
             correctAnswer={correctAnswer}
@@ -161,19 +161,21 @@ function QuizPage() {
 
 const QuizCard = ({ question, answerSubmit, decodeHTML }) => {
   const { question: encodedQuestion, answers } = question;
+  const arrayOfLetters = ['A:    ', 'B:    ', 'C:    ', 'D:    '];
 
   return (
-    <div id="quiz-card">
-      <div id="quiz-question">{decodeHTML(encodedQuestion)}</div>
+    <div id='quiz-card'>
+      <div id='quiz-question'>{decodeHTML(encodedQuestion)}</div>
       {answers &&
         answers.map((answer, index) => (
           <button
-            id="quiz-button"
+            id='quiz-button'
             key={index}
             onClick={answerSubmit}
             value={decodeHTML(answer)}
           >
-            {answer}
+            {arrayOfLetters[index]}
+            {decodeHTML(answer)}
           </button>
         ))}
     </div>
@@ -183,11 +185,11 @@ const QuizCard = ({ question, answerSubmit, decodeHTML }) => {
 const AnswerFeedback = ({ correctAnswer, resetShowFeedback }) => {
   // a modal displaying "Correct" or "Incorrect"
   return (
-    <div id="feedbackContainer">
-      <div id="feedbackMessage">
+    <div id='feedbackContainer'>
+      <div id='feedbackMessage'>
         {correctAnswer ? <h1>Correct! :)</h1> : <h1>Incorrect :(</h1>}
       </div>
-      <button id="answerFeedbackButton" onClick={() => resetShowFeedback()}>
+      <button id='answerFeedbackButton' onClick={() => resetShowFeedback()}>
         OK
       </button>
     </div>
@@ -196,15 +198,14 @@ const AnswerFeedback = ({ correctAnswer, resetShowFeedback }) => {
 
 const Congratulations = ({ correct, goBackFunc }) => {
   return (
-    <div id="congrats-page">
-      <div id="congrats-message">
+    <div id='congrats-page'>
+      <div id='congrats-message'>
         {' '}
         Congratulations! You got {correct} correct!
-        <button id="home-button" onClick={goBackFunc}>
-        Go Back to Home!
-      </button>
+        <button id='home-button' onClick={goBackFunc}>
+          Go Back to Home!
+        </button>
       </div>
-
     </div>
   );
 };

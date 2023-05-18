@@ -8,7 +8,7 @@ function HomeElement() {
   const location = useLocation();
   // const navigate = useNavigate();
   const { data } = location.state;
-  const [ userScore, setUserScore ] = useState(data.score);
+  const [userScore, setUserScore] = useState(data.score);
   console.log(data);
 
   return (
@@ -17,7 +17,11 @@ function HomeElement() {
         <QuizSelectionBar />
       </div>
       <div className='userSection'>
-        <UserContainer name={data.name} score={userScore} setScore={setUserScore}/>
+        <UserContainer
+          name={data.name}
+          score={userScore}
+          setScore={setUserScore}
+        />
       </div>
     </div>
   );
@@ -69,8 +73,6 @@ export function QuizElements() {
 
 //------->Center Element<--------
 export function UserContainer({ name, score, setScore }) {
-
-
   return (
     <div className='userHolder'>
       <CenterUserData score={score} />
@@ -94,6 +96,7 @@ function CenterUserData({ score }) {
 //------->Center/Right Element<--------
 
 function UserNav({ name, setScore }) {
+  const navigate = useNavigate();
   const logOut = function () {
     fetch('/logout', {
       method: 'DELETE',
@@ -125,7 +128,7 @@ function UserNav({ name, setScore }) {
           console.log('Score has been reset');
         }
       })
-      .catch((err) => console.log("this is the error" + err));
+      .catch((err) => console.log('this is the error' + err));
   };
 
   return (
@@ -137,7 +140,9 @@ function UserNav({ name, setScore }) {
       <button id='logoutBtn' className='secondary-button' onClick={logOut}>
         Log Out
       </button>
-      <button id='resetBtn' className='secondary-button' onClick={resetScore}>Reset Me</button>
+      <button id='resetBtn' className='secondary-button' onClick={resetScore}>
+        Reset Me
+      </button>
     </div>
   );
 }
