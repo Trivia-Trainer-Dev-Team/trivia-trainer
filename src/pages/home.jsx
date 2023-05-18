@@ -6,6 +6,7 @@ import DangerNoodle from '../../public/DangerNoodle.png';
 //------>Full Page<-----
 function HomeElement() {
   const location = useLocation();
+  // const navigate = useNavigate();
   const { data } = location.state;
   const [ userScore, setUserScore ] = useState(data.score);
   console.log(data);
@@ -110,6 +111,7 @@ function UserNav({ name, setScore }) {
 
   const resetScore = function () {
     const payload = { resetValue: 0 };
+    //console.log(payload); // Check the payload structure in the browser console
     fetch('/users/reset', {
       method: 'PATCH',
       headers: {

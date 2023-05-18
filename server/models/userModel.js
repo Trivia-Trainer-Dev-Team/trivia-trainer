@@ -13,5 +13,8 @@ userSchema.methods.increaseScore = function (score) {
   this.score += score;
   return this.save();
 };
-
+userSchema.methods.reset = function (resetValue) {
+   this.score = resetValue;
+   return this.save();
+ };
 module.exports = mongoose.model('User', userSchema);
