@@ -10,11 +10,6 @@ function HomeElement() {
   console.log(data);
 
   return (
-<<<<<<< HEAD
-    <div id="fullHomepage">
-      <QuizSelectionBar />
-      <UserContainer name={data.name} score={data.score} />
-=======
     <div id='fullHomepage'>
       <div className='quizSection'>
         <QuizSelectionBar />
@@ -22,7 +17,6 @@ function HomeElement() {
       <div className='userSection'>
         <UserContainer name={data.name} score={data.score} />
       </div>
->>>>>>> dev
     </div>
   );
 }
@@ -39,13 +33,8 @@ function QuizSelectionBar() {
 
 function QuizTitle() {
   return (
-<<<<<<< HEAD
-    <div id="QuizTitle">
-      <h3>This is the title</h3>
-=======
     <div id='QuizTitle'>
       <h3>Choose Category</h3>
->>>>>>> dev
     </div>
   );
 }
