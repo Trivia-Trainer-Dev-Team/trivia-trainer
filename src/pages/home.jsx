@@ -83,8 +83,8 @@ function CenterUserData({ score }) {
     <div className='center'>
       {/* These will be used as get requests later on. */}
       <div className='correctSection'>
-        <h3>Questions Correct: </h3>
-        <span>{score}</span>
+        <h3>Questions Correct:</h3>
+        <h3>{score}</h3>
       </div>
     </div>
   );
