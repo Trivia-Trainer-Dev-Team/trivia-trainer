@@ -1,6 +1,8 @@
 import React, { Component, useEffect, useState } from 'react';
 import { useNavigate, NavLink, useLocation, Navigate } from 'react-router-dom';
 import '../stylings/home-page.scss';
+import DangerNoodle from '../../public/DangerNoodle.png';
+
 //------>Full Page<-----
 function HomeElement() {
   const location = useLocation();
@@ -22,7 +24,7 @@ function HomeElement() {
 //------->Left Nav Bar<---------
 function QuizSelectionBar() {
   return (
-    <div id="QuizBar">
+    <div id='QuizBar'>
       <QuizTitle />
       <QuizElements />
     </div>
@@ -49,7 +51,7 @@ function QuizElements() {
   ];
 
   return (
-    <div id="Quizzes">
+    <div id='Quizzes'>
       {elements.map((el, i) => {
         return (
           <NavLink key={i} to={`/quiz/${el}`}>
@@ -80,8 +82,8 @@ function CenterUserData({ score }) {
     <div className='center'>
       {/* These will be used as get requests later on. */}
       <div className='correctSection'>
-        <h3>Questions Correct</h3>
-        <span>{score}</span>
+        <h3>Questions Correct:</h3>
+        <h3>{score}</h3>
       </div>
     </div>
   );
@@ -120,7 +122,7 @@ function UserNav({ name }) {
 }
 
 function UserImage() {
-  return <img src="#"></img>;
+  return <img src={DangerNoodle} alt='Danger Noodle' />;
 }
 
 function UserBody({ name }) {
