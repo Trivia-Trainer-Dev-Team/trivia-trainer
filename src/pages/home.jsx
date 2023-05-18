@@ -6,7 +6,9 @@ import DangerNoodle from '../../public/DangerNoodle.png';
 //------>Full Page<-----
 function HomeElement() {
   const location = useLocation();
+  // const navigate = useNavigate();
   const { data } = location.state;
+  const [ userScore, setUserScore ] = useState(data.score);
   console.log(data);
 
   return (
@@ -15,7 +17,7 @@ function HomeElement() {
         <QuizSelectionBar />
       </div>
       <div className='userSection'>
-        <UserContainer name={data.name} score={data.score} />
+        <UserContainer name={data.name} score={userScore} setScore={setUserScore}/>
       </div>
     </div>
   );
@@ -66,13 +68,13 @@ export function QuizElements() {
 //------->Left Nav Bar<-------
 
 //------->Center Element<--------
-export function UserContainer({ name, score }) {
-  const [right, setRight] = useState('');
+export function UserContainer({ name, score, setScore }) {
+
 
   return (
     <div className='userHolder'>
       <CenterUserData score={score} />
-      <UserNav name={name} />
+      <UserNav name={name} setScore={setScore} />
     </div>
   );
 }
@@ -91,8 +93,7 @@ function CenterUserData({ score }) {
 
 //------->Center/Right Element<--------
 
-function UserNav({ name }) {
-  const navigate = useNavigate();
+function UserNav({ name, setScore }) {
   const logOut = function () {
     fetch('/logout', {
       method: 'DELETE',
@@ -108,6 +109,25 @@ function UserNav({ name }) {
       .catch((err) => console.log(err));
   };
 
+  const resetScore = function () {
+    const payload = { resetValue: 0 };
+    //console.log(payload); // Check the payload structure in the browser console
+    fetch('/users/reset', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => {
+        if (response.ok) {
+          setScore(0);
+          console.log('Score has been reset');
+        }
+      })
+      .catch((err) => console.log("this is the error" + err));
+  };
+
   return (
     <div className='userNav'>
       <div className='userInfo'>
@@ -117,6 +137,7 @@ function UserNav({ name }) {
       <button id='logoutBtn' className='secondary-button' onClick={logOut}>
         Log Out
       </button>
+      <button id='resetBtn' className='secondary-button' onClick={resetScore}>Reset Me</button>
     </div>
   );
 }
