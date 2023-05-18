@@ -28,7 +28,7 @@ export function LoginFeature() {
       const response = await fetch(
         `/users/?username=${username}&password=${password}`,
         {
-          method: 'get',
+          method: 'GET',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -52,31 +52,31 @@ export function LoginFeature() {
       </div>
       <div className="inputsContainer">
         <input
-          type="text"
+          type='text'
           value={username}
           onChange={usernameChangeEvent}
-          placeholder="Username"
-          className="textField"
+          placeholder='Username'
+          className='textField'
         ></input>
         <input
-          type="password"
+          type='password'
           value={password}
           onChange={passwordChangeEvent}
-          placeholder="Password"
-          className="textField"
+          placeholder='Password'
+          className='textField'
         ></input>
       </div>
       <div className="buttonHolder">
         <form onSubmit={handleLogin}>
           <input
-            id="login-button"
-            type="submit"
-            value="Login"
-            className="primary-button"
+            id='login-button'
+            type='submit'
+            value='Login'
+            className='primary-button'
           ></input>
         </form>
-        <a id="signup-button" href="/signup">
-          <button className="secondary-button">Create Account</button>
+        <a id='signup-button' href='/signup'>
+          <button className='secondary-button'>Create Account</button>
         </a>
       </div>
     </div>
