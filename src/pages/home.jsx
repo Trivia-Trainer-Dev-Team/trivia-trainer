@@ -41,7 +41,7 @@ function QuizTitle() {
   );
 }
 
-function QuizElements() {
+export function QuizElements() {
   // reformat this to use elements that can navigate to specific urls.
   const elements = [
     'Sports',
@@ -68,8 +68,8 @@ function QuizElements() {
 //------->Left Nav Bar<-------
 
 //------->Center Element<--------
-function UserContainer({ name, score, setScore }) {
-  const [right, setRight] = useState('');
+export function UserContainer({ name, score, setScore }) {
+
 
   return (
     <div className='userHolder'>
