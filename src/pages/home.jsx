@@ -110,7 +110,6 @@ function UserNav({ name, setScore }) {
 
   const resetScore = function () {
     const payload = { resetValue: 0 };
-    //console.log(payload); // Check the payload structure in the browser console
     fetch('/users/reset', {
       method: 'PATCH',
       headers: {

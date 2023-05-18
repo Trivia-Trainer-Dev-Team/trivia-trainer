@@ -124,10 +124,8 @@ userController.updateScore = async (req, res, next) => {
 
 userController.resetScore = async (req, res, next) => {
   const { ssid } = req.cookies;
-  // const { resetValue } = req.body;
   try {
     const user = await User.findOne({ _id: ssid });
-    // console.log('this is the user' + resetValue)
     if (!user) {
       return next({
         log: 'Error occurred in userController.resetScore',
