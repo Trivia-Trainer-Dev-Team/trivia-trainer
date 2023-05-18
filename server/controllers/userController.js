@@ -34,6 +34,25 @@ userController.createUser = async (req, res, next) => {
    }
 };
 
+//get user from cookie
+userController.getUserFromCookie = (req, res, next) => {
+  const { ssid } = req.cookies;
+  User.find({ _id: ssid })
+    .then((user) => {
+      res.locals.user = user;
+      return next();
+    })
+    .catch((err) =>
+      next({
+        log: 'Error occurred in userController.verifyUser',
+        status: 400,
+        message: {
+          err: 'An error occurred in getting the user from the cookie',
+        },
+      })
+    );
+};
+
 //USER LOGIN
 userController.verifyUser = async (req, res, next) => {
    const { username, password } = req.query; //all we need is these two to login

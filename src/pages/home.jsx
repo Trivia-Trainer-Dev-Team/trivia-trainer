@@ -1,9 +1,10 @@
 import React, { Component, useEffect, useState } from 'react';
-import { useNavigate, NavLink, useLocation } from 'react-router-dom';
+import { useNavigate, NavLink, useLocation, Navigate } from 'react-router-dom';
 
 //------>Full Page<-----
 function HomeElement() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { data } = location.state;
   console.log(data);
 
@@ -77,10 +78,26 @@ function CenterUserData({ right }) {
 //------->Center/Right Element<--------
 
 function UserNav({ name }) {
+  const logOut = function () {
+    fetch('/logout', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          navigate('/');
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div>
       <UserImage />
       <UserBody name={name} />
+      <button onClick={logOut}>Log Out!</button>
     </div>
   );
 }
