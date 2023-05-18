@@ -81,7 +81,7 @@ function QuizPage() {
   function resetShowFeedback() {
     setShowAnswerFeedback(false);
     setCorrectAnswer(null);
-  };
+  }
 
   const answerSubmission = async (event) => {
     const answer = event.target.value;
@@ -163,11 +163,16 @@ const QuizCard = ({ question, answerSubmit, decodeHTML }) => {
   const { question: encodedQuestion, answers } = question;
 
   return (
-    <div>
-      <div>{decodeHTML(encodedQuestion)}</div>
+    <div id="quiz-card">
+      <div id="quiz-question">{decodeHTML(encodedQuestion)}</div>
       {answers &&
         answers.map((answer, index) => (
-          <button key={index} onClick={answerSubmit} value={answer}>
+          <button
+            id="quiz-button"
+            key={index}
+            onClick={answerSubmit}
+            value={decodeHTML(answer)}
+          >
             {answer}
           </button>
         ))}
@@ -180,7 +185,7 @@ const AnswerFeedback = ({ correctAnswer, resetShowFeedback }) => {
   return (
     <div id="feedbackContainer">
       <div id="feedbackMessage">
-        {correctAnswer ? (<h1>Correct! :)</h1>) : (<h1>Incorrect :(</h1>)}
+        {correctAnswer ? <h1>Correct! :)</h1> : <h1>Incorrect :(</h1>}
       </div>
       <button id="answerFeedbackButton" onClick={() => resetShowFeedback()}>
         OK
@@ -191,9 +196,15 @@ const AnswerFeedback = ({ correctAnswer, resetShowFeedback }) => {
 
 const Congratulations = ({ correct, goBackFunc }) => {
   return (
-    <div>
-      <div>Congratulations! You got {correct} correct!</div>
-      <button onClick={goBackFunc}>Go Back to Home!</button>
+    <div id="congrats-page">
+      <div id="congrats-message">
+        {' '}
+        Congratulations! You got {correct} correct!
+        <button id="home-button" onClick={goBackFunc}>
+        Go Back to Home!
+      </button>
+      </div>
+
     </div>
   );
 };
