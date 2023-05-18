@@ -3,27 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 function SignupPage() {
   return (
-    <div id="pageContainer">
-      <div id="page-title">
-        <h1>Sign Up!</h1>
-      </div>
-      <Logo id="logo" />
-      <LoginContainer />
-    </div>
-  );
-}
-
-function Logo() {
-  return (
-    <div id='logo'>
-      
-    </div>
-  );
-}
-
-function LoginContainer() {
-  return (
-    <div id='login'>
+    <div className="pageContainer">
       <LoginFeature />
     </div>
   );
@@ -68,33 +48,41 @@ function LoginFeature() {
   };
 
   return (
-    <div id='forms'>
-      <h2>Sign up!</h2>
-      <p>Username</p>
-      <input
-        type='text'
-        value={username}
-        onChange={usernameChangeEvent}
-        className='textField'
-      ></input>
-      <p>Password</p>
-      <input
-        type='password'
-        value={password}
-        onChange={passwordChangeEvent}
-        className='textField'
-      ></input>
-      <p>Full name</p>
-      <input
-        type='name'
-        value={name}
-        onChange={nameChangeEvent}
-        className='textField'
-      ></input>
-      <form onSubmit={signUpHandler}>
-        <input type='submit' value='Signup' className='button'></input>
-      </form>
-      <a href='/'>Click Here to Login</a>
+    <div id="forms">
+      <div className='titles'>
+        <h1>Sign up!</h1>
+      </div>
+      <div className="inputsContainer">
+        <input
+          type="text"
+          placeholder='Username'
+          value={username}
+          onChange={usernameChangeEvent}
+          className="textField"
+        ></input>
+        <input
+          type="password"
+          placeholder='Password'
+          value={password}
+          onChange={passwordChangeEvent}
+          className="textField"
+        ></input>
+        <input
+          type="name"
+          placeholder='Full Name'
+          value={name}
+          onChange={nameChangeEvent}
+          className="textField"
+        ></input>
+      </div>
+      <div className="buttonHolder">
+        <form onSubmit={signUpHandler}>
+          <input type="submit" value="Create Account" className="primary-button"></input>
+        </form>
+        <a href="/">
+          <button className='secondary-button'>Cancel</button>
+        </a>
+      </div>
     </div>
   );
 }

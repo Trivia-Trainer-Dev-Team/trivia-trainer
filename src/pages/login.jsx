@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
   return (
-    <div id="pageContainer">
+    <div className="pageContainer">
       <LoginFeature />
     </div>
   );
@@ -46,7 +46,7 @@ export function LoginFeature() {
 
   return (
     <div id="forms">
-      <div id="titles">
+      <div className="titles">
         <h1 id="page-title">Login Page</h1>
         <h2 id="welcome">Welcome Back!</h2>
       </div>
@@ -66,7 +66,7 @@ export function LoginFeature() {
           className="textField"
         ></input>
       </div>
-      <div id="buttonHolder">
+      <div className="buttonHolder">
         <form onSubmit={handleLogin}>
           <input
             id="login-button"
