@@ -135,7 +135,7 @@ function UserNav({ name, setScore }) {
       <button id='logoutBtn' className='secondary-button' onClick={logOut}>
         Log Out
       </button>
-      <button id='resetButton' className='secondary-button' onClick={resetScore}>Reset Me</button>
+      <button id='resetBtn' className='secondary-button' onClick={resetScore}>Reset Me</button>
     </div>
   );
 }
