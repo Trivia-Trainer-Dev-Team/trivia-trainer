@@ -50,7 +50,14 @@ function QuizTitle() {
 
 function QuizElements() {
   // reformat this to use elements that can navigate to specific urls.
-  const elements = ['Sports', 'Mathematics', 'Computers'];
+  const elements = [
+    'Sports',
+    'Mathematics',
+    'Computers',
+    'Music',
+    'Games',
+    'Television',
+  ];
 
   return (
     <div id="Quizzes">
