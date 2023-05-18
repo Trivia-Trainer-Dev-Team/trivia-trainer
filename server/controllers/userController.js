@@ -87,7 +87,6 @@ userController.verifyUser = async (req, res, next) => {
         message: { err: 'An error occurred' },
       });
     }
-
     res.locals.user = user;
     return next();
   } catch (err) {
@@ -100,30 +99,29 @@ userController.verifyUser = async (req, res, next) => {
 };
 
 userController.updateScore = async (req, res, next) => {
+  const { ssid } = req.cookies; //When you finish the quiz, it should send over the username of the person and the #of correct questions
+  const { correctAnswer } = req.body;
   try {
-    const { ssid } = req.cookies;
-    const { correctAnswer } = req.body;
     const user = await User.findOne({ _id: ssid });
     if (user) {
       await user.increaseScore(correctAnswer);
-      const updatedScore = { score: user.score }; //needs to send this cookies
       return next();
     } else {
-       return next({
-           log: 'Error occurred in userController.updateScore',
-           status: 400,
-           message: {error: "User not found"}
-       })
-     }
-   } catch (error) {
-       return next({
-           log: 'Error occurred in userController.updateScore',
-           status: 400,
-           message: { err: 'An error occurred' },
-       });
-   }
- };
- 
+      return next({
+        log: 'Error occurred in userController.updateScore',
+        status: 400,
+        message: { error: 'User not found' },
+      });
+    }
+  } catch (error) {
+    return next({
+      log: 'Error occurred in userController.updateScore',
+      status: 400,
+      message: { err: 'An error occurred' },
+    });
+  }
+};
+
 userController.resetScore = async (req, res, next) => {
   const { username } = req.params;
   try {
