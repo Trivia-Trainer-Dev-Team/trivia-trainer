@@ -63,12 +63,12 @@ app.patch('/users/', userController.updateScore, (req, res) => {
   return res.status(202).json('Score Updated');
 });
 
-//handler for cookies
-//checks if current session is still active
+// handler for cookies
+// checks if current session is still active
 
-//clear cookie and remove current session when logged out
+// clear cookie and remove current session when logged out
 app.delete('/logout', cookieController.deleteCookie, (req, res) => {
-  return res.redirect('/');
+  return res.status(200).json('Logout Successful!');
 });
 
 //global error handler

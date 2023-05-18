@@ -6,7 +6,7 @@ cookieController.setSSIDCookie = async (req, res, next) => {
   try {
     console.log('ssid', res.locals.user.id);
     res.cookie('ssid', res.locals.user.id);
-    next();
+    return next();
   } catch (err) {
     next({
       log: 'An error occurred in cookieController in the setSSIDCookie middleware function',
@@ -18,7 +18,9 @@ cookieController.setSSIDCookie = async (req, res, next) => {
 
 cookieController.deleteCookie = async (req, res, next) => {
   try {
-    res.clearcookie('ssid', res.locals.user.id);
+    console.log('trying to delete');
+    res.clearCookie('ssid');
+    return next();
   } catch (err) {
     next({
       log: 'An error occurred in cookieController in the deleteCookie middleware function',
