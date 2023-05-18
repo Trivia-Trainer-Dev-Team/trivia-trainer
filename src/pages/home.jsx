@@ -1,16 +1,19 @@
 import React, { Component, useEffect, useState } from 'react';
-import { useNavigate, NavLink, useLocation } from 'react-router-dom';
+import { useNavigate, NavLink, useLocation, Navigate } from 'react-router-dom';
+// import { response } from '../../server/server';
+// import { resetScore } from '../../server/controllers/userController';
 
 //------>Full Page<-----
 function HomeElement() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { data } = location.state;
   console.log(data);
 
   return (
     <div id='fullHomepage'>
       <QuizSelectionBar />
-      <UserContainer name={data.name} />
+      <UserContainer name={data.name} score={data.score} />
     </div>
   );
 }
@@ -53,22 +56,22 @@ function QuizElements() {
 //------->Left Nav Bar<-------
 
 //------->Center Element<--------
-function UserContainer({ name }) {
+function UserContainer({ name, score }) {
   const [right, setRight] = useState('');
 
   return (
     <div>
-      <CenterUserData right={right} />
+      <CenterUserData score={score} />
       <UserNav name={name} />
     </div>
   );
 }
 
-function CenterUserData({ right }) {
+function CenterUserData({ score }) {
   return (
     <div>
       {/* These will be used as get requests later on. */}
-      <span>{right}</span>
+      <span>{score}</span>
       <h5>Questions Correct</h5>
     </div>
   );
@@ -77,11 +80,42 @@ function CenterUserData({ right }) {
 //------->Center/Right Element<--------
 
 function UserNav({ name }) {
+  const logOut = function () {
+    fetch('/logout', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          navigate('/');
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const resetScore = function () {
+    fetch('/Users', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        if(response.ok){
+          console.log('score has been reset')
+        }
+      })
+      .catch((err) => console.log(err))
+  }
+
   return (
     <div>
       <UserImage />
       <UserBody name={name} />
-      <ResetScore />
+      <button onClick={logOut}>Log Out!</button>
+      <button onClick={resetScore}>Reset Me</button>
     </div>
   );
 }
@@ -92,10 +126,6 @@ function UserImage() {
 
 function UserBody({ name }) {
   return <p>{name}</p>;
-}
-
-function ResetScore(){
-  return <button id="resetScoreButton">Reset Me</button>
 }
 
 export default HomeElement;

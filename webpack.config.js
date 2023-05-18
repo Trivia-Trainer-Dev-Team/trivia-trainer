@@ -23,6 +23,10 @@ module.exports = {
         target: 'http://localhost:3000/',
         secure: false,
       },
+      '/logout': {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
     },
   },
 
