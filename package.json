@@ -8,6 +8,11 @@
     "dev": "webpack-dev-server",
     "start": "concurrently \"webpack-dev-server\" \"nodemon ./server/server.js\""
   },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less|sass|scss)$": "babel-jest"
+    }
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -20,6 +25,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "babel-eslint": "^10.1.0",
+    "babel-jest": "^29.5.0",
     "babel-loader": "^9.1.2",
     "concurrently": "^8.0.1",
     "cookie-parser": "^1.4.6",
