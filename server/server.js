@@ -53,7 +53,7 @@ app.patch('/users/', userController.updateScore, (req, res) => {
   return res.status(202).json('Score Updated');
 });
 
-app.patch('/users', userController.resetScore, (req, res) => {
+app.patch('/users/', userController.resetScore, (req, res) => {
   return res.status(204).json('Score Has Been Reset')
 })
 //handler for cookies

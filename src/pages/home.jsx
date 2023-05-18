@@ -81,6 +81,7 @@ function UserNav({ name }) {
     <div>
       <UserImage />
       <UserBody name={name} />
+      <ResetScore />
     </div>
   );
 }
@@ -91,6 +92,10 @@ function UserImage() {
 
 function UserBody({ name }) {
   return <p>{name}</p>;
+}
+
+function ResetScore(){
+  return <button id="resetScoreButton">Reset Me</button>
 }
 
 export default HomeElement;

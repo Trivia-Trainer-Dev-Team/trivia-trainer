@@ -143,7 +143,7 @@ userController.resetScore = async (req, res, next) => {
     });
   }
 };
-  userController.hashpassword = async (req, res, next) => {
+userController.hashpassword = async (req, res, next) => {
     try{
     console.log('Trying to hash password');
     const {password} = req.body;
