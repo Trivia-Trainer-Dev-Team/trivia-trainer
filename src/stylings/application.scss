@@ -17,22 +17,4 @@ $marginTop: 50px;
 
 
 
-.primary-button {
-  width: 20vw;
-  height: 30px;
-  background-color: $text-color2;
-  border-color: $text-color1;
-  border-radius: $border-radius;
-  font-size: medium;
-  font-weight: bolder;
-  margin-top: 10px;
-}
 
-.secondary-button {
-  background-color: $primary-color1;
-  color: rgba($text-color1, 0.68);
-  border-radius: $border-radius;
-  border: 1px solid rgba($text-color1, 0.68);
-  height: 20px;
-  margin-top: 10px;
-}

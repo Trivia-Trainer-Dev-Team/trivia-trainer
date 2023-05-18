@@ -36,6 +36,7 @@ body {
 .titles {
   margin-top: 20%;
   margin-bottom: 20px;
+  text-align: center;
   h1 {
     color: $text-color1;
     letter-spacing: 2px;
@@ -53,7 +54,7 @@ body {
   justify-content: space-around;
   align-items: center;
   width: 50vw;
-  height: 20vh;
+  height: 180px;
 }
 
 .textField {
@@ -69,9 +70,26 @@ body {
   height: 6vh;
   display: block;
   text-align: center;
-  margin-top: 20px;
   padding: 10 5 5 10px;
 
 }
 
+.primary-button {
+  width: 20vw;
+  height: 30px;
+  background-color: $text-color2;
+  border-color: $text-color1;
+  border-radius: $border-radius;
+  font-size: medium;
+  font-weight: bolder;
+  margin-top: 10px;
+}
 
+.secondary-button {
+  background-color: $primary-color1;
+  color: rgba($text-color1, 0.68);
+  border-radius: $border-radius;
+  border: 1px solid rgba($text-color1, 0.68);
+  height: 20px;
+  margin-top: 10px;
+}
