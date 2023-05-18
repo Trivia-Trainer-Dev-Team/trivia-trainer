@@ -12,6 +12,8 @@ function QuizPage() {
   const [quizScore, setQuizScore] = useState(0);
   const [index, setIndex] = useState(0);
   const [quizEnd, setQuizEnd] = useState(false);
+  const [showAnswerFeedback, setShowAnswerFeedback] = useState(false);
+  const [correctAnswer, setCorrectAnswer] = useState(null);
 
   const fetchQuizData = () => {
     setLoading(true);
@@ -73,9 +75,13 @@ function QuizPage() {
         array[currentIndex],
       ];
     }
-
     return array;
   }
+
+  function resetShowFeedback() {
+    setShowAnswerFeedback(false);
+    setCorrectAnswer(null);
+  };
 
   const answerSubmission = async (event) => {
     const answer = event.target.value;
@@ -83,6 +89,11 @@ function QuizPage() {
 
     if (answer === currQuestion.correct_answer) {
       setQuizScore((prevScore) => prevScore + 1);
+      setCorrectAnswer(true);
+      setShowAnswerFeedback(true);
+    } else {
+      setCorrectAnswer(false);
+      setShowAnswerFeedback(true);
     }
 
     if (nextIndex >= quizList.length) {
@@ -122,7 +133,7 @@ function QuizPage() {
       {loading ? (
         <div>...Data Loading...</div>
       ) : (
-        <div id='question-card'>
+        <div id="question-card">
           {quizEnd ? (
             <Congratulations correct={quizScore} goBackFunc={goBack} />
           ) : (
@@ -136,6 +147,14 @@ function QuizPage() {
           )}
         </div>
       )}
+      <div id="feedbackModal">
+        {showAnswerFeedback ? (
+          <AnswerFeedback
+            correctAnswer={correctAnswer}
+            resetShowFeedback={resetShowFeedback}
+          />
+        ) : null}
+      </div>
     </>
   );
 }
@@ -152,6 +171,20 @@ const QuizCard = ({ question, answerSubmit, decodeHTML }) => {
             {answer}
           </button>
         ))}
+    </div>
+  );
+};
+
+const AnswerFeedback = ({ correctAnswer, resetShowFeedback }) => {
+  // a modal displaying "Correct" or "Incorrect"
+  return (
+    <div id="feedbackContainer">
+      <div id="feedbackMessage">
+        {correctAnswer ? (<h1>Correct! :)</h1>) : (<h1>Incorrect :(</h1>)}
+      </div>
+      <button id="answerFeedbackButton" onClick={() => resetShowFeedback()}>
+        OK
+      </button>
     </div>
   );
 };
