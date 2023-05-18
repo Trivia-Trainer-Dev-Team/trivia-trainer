@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams, useNavigate } from 'react-router-dom';
 import he from 'he';
 
 function QuizPage() {
+  const navigate = useNavigate();
   const { genre } = useParams();
 
   const [quizList, setQuizList] = useState([]);
@@ -85,16 +86,34 @@ function QuizPage() {
     }
 
     if (nextIndex >= quizList.length) {
-      setQuizEnd(true);
-      fetch('/users', {
-        method: 'patch',
+      await fetch('/users', {
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ correctAnswer: quizScore }),
       });
+      setQuizEnd(true);
     } else {
       setIndex(nextIndex);
+    }
+  };
+
+  const goBack = async function () {
+    try {
+      const response = await fetch('/users/cookie', {
+        method: 'get',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const [data] = await response.json();
+      console.log('This is the data', data);
+      if (data) {
+        navigate('/home', { state: { data } });
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -105,7 +124,7 @@ function QuizPage() {
       ) : (
         <div id='question-card'>
           {quizEnd ? (
-            <div>{quizScore}</div>
+            <Congratulations correct={quizScore} goBackFunc={goBack} />
           ) : (
             <>
               <QuizCard
@@ -133,6 +152,15 @@ const QuizCard = ({ question, answerSubmit, decodeHTML }) => {
             {answer}
           </button>
         ))}
+    </div>
+  );
+};
+
+const Congratulations = ({ correct, goBackFunc }) => {
+  return (
+    <div>
+      <div>Congratulations! You got {correct} correct!</div>
+      <button onClick={goBackFunc}>Go Back to Home!</button>
     </div>
   );
 };

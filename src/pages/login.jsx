@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
   return (
-    <div id="pageContainer">
+    <div id='pageContainer'>
       <LoginFeature />
     </div>
   );
@@ -28,7 +28,7 @@ export function LoginFeature() {
       const response = await fetch(
         `/users/?username=${username}&password=${password}`,
         {
-          method: 'get',
+          method: 'GET',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -45,38 +45,38 @@ export function LoginFeature() {
   };
 
   return (
-    <div id="forms">
-      <div id="titles">
-        <h1 id="page-title">Login Page</h1>
-        <h2 id="welcome">Welcome Back!</h2>
+    <div id='forms'>
+      <div id='titles'>
+        <h1 id='page-title'>Login Page</h1>
+        <h2 id='welcome'>Welcome Back!</h2>
       </div>
-      <div className="inputFields">
+      <div className='inputFields'>
         <input
-          type="text"
+          type='text'
           value={username}
           onChange={usernameChangeEvent}
-          placeholder="Username"
-          className="textField"
+          placeholder='Username'
+          className='textField'
         ></input>
         <input
-          type="password"
+          type='password'
           value={password}
           onChange={passwordChangeEvent}
-          placeholder="Password"
-          className="textField"
+          placeholder='Password'
+          className='textField'
         ></input>
       </div>
-      <div id="buttonHolder">
+      <div id='buttonHolder'>
         <form onSubmit={handleLogin}>
           <input
-            id="login-button"
-            type="submit"
-            value="Login"
-            className="primary-button"
+            id='login-button'
+            type='submit'
+            value='Login'
+            className='primary-button'
           ></input>
         </form>
-        <a id="signup-button" href="/signup">
-          <button className="secondary-button">Create Account</button>
+        <a id='signup-button' href='/signup'>
+          <button className='secondary-button'>Create Account</button>
         </a>
       </div>
     </div>
