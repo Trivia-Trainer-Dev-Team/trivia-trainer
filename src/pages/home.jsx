@@ -1,10 +1,11 @@
 import React, { Component, useEffect, useState } from 'react';
 import { useNavigate, NavLink, useLocation, Navigate } from 'react-router-dom';
 import '../stylings/home-page.scss';
+import DangerNoodle from '../../public/DangerNoodle.png';
+
 //------>Full Page<-----
 function HomeElement() {
   const location = useLocation();
-  const navigate = useNavigate();
   const { data } = location.state;
   console.log(data);
 
@@ -81,8 +82,8 @@ function CenterUserData({ score }) {
     <div className='center'>
       {/* These will be used as get requests later on. */}
       <div className='correctSection'>
-        <h3>Questions Correct</h3>
-        <span>{score}</span>
+        <h3>Questions Correct:</h3>
+        <h3>{score}</h3>
       </div>
     </div>
   );
@@ -91,6 +92,7 @@ function CenterUserData({ score }) {
 //------->Center/Right Element<--------
 
 function UserNav({ name }) {
+  const navigate = useNavigate();
   const logOut = function () {
     fetch('/logout', {
       method: 'DELETE',
@@ -120,7 +122,7 @@ function UserNav({ name }) {
 }
 
 function UserImage() {
-  return <img src='#' className='profile'></img>;
+  return <img src={DangerNoodle} alt='Danger Noodle' />;
 }
 
 function UserBody({ name }) {

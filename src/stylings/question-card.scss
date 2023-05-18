@@ -7,6 +7,111 @@ $secondary-color1: #576cbc;
 $secondary-color2: #9ba4b5;
 $text-color1: #f1f6f9;
 $text-color2: #a5d7e8;
+$quizcardbackground: #7cc6fe;
 
 $border-radius: 8px;
 $marginTop: 50px;
+
+body {
+  background-color: #7cc6fe;
+}
+
+#quiz-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  height: 80%;
+  width: 80%;
+  background-color: #252d4a;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+}
+
+#quiz-question {
+  display: flex;
+  font-size: 40px;
+  color: white;
+  text-align: center;
+}
+
+#quiz-button {
+  background-color: $primary-color1;
+  color: $text-color1;
+  border: 5px solid #234668;
+  margin-top: 20px;
+  font-size: 16px;
+  padding: 5px;
+  width: 200px;
+  height: 60px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+#quiz-button:hover {
+  background-color: #555e7d;
+}
+
+#congrats-message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: #252d4a;
+  height: 80%;
+  width: 80%;
+  color: white;
+  position: absolute;
+  text-align: center;
+  align-items: center;
+  font-size: 50px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+}
+
+#home-button {
+  background-color: $primary-color1;
+  color: $text-color1;
+  border: 5px solid #234668;
+  margin-top: 20px;
+  font-size: 16px;
+  padding: 5px;
+  width: 200px;
+  height: 60px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+#feedbackContainer {
+  z-index: 9999;
+  width: 200px;
+  height: 150px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: $secondary-color2;
+  border: 8px solid #ffffff;
+  border-radius: $border-radius;
+  color: $base-color1;
+  text-align: center;
+  padding: 16px;
+  font-size: larger;
+
+  button {
+    width: 40%;
+    height: 30px;
+    background-color: $text-color2;
+    border-color: $text-color1;
+    border-radius: $border-radius;
+    font-size: medium;
+    font-weight: bolder;
+    margin-top: 10px;
+  }
+}
