@@ -100,12 +100,12 @@ userController.verifyUser = async (req, res, next) => {
 };
 
 userController.updateScore = async (req, res, next) => {
-  const { username } = req.params; //When you finish the quiz, it should send over the username of the person and the #of correct questions
+  const { ssid } = req.cookies; //When you finish the quiz, it should send over the username of the person and the #of correct questions
+  const { correctAnswer } = req.body;
   try {
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ _id: ssid });
     if (user) {
-      await user.increaseScore();
-      const updatedScore = { score: user.score }; //needs to send this cookies
+      await user.increaseScore(correctAnswer);
       return next();
     } else {
       return next({
