@@ -75,7 +75,6 @@ function QuizPage() {
         array[currentIndex],
       ];
     }
-
     return array;
   }
 
@@ -181,7 +180,7 @@ const AnswerFeedback = ({ correctAnswer, resetShowFeedback }) => {
   return (
     <div id="feedbackContainer">
       <div id="feedbackMessage">
-        {correctAnswer ? <h1>Correct! :)</h1> : <h1>Incorrect :(</h1>}
+        {correctAnswer ? (<h1>Correct! :)</h1>) : (<h1>Incorrect :(</h1>)}
       </div>
       <button id="answerFeedbackButton" onClick={() => resetShowFeedback}>
         OK
