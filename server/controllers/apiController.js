@@ -12,7 +12,7 @@ apiController.retrieveData = async (req, res, next) => {
       Television: 14,
     };
 
-    const url = `https://opentdb.com/api.php?amount=10&category=${numberObj[category]}&difficulty=easy&type=multiple`;
+    const url = `https://opentdb.com/api.php?amount=5&category=${numberObj[category]}&difficulty=easy&type=multiple`;
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
