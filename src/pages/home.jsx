@@ -14,7 +14,7 @@ function HomeElement() {
         <QuizSelectionBar />
       </div>
       <div className='userSection'>
-        <UserContainer name={data.name} />
+        <UserContainer name={data.name} score={data.score} />
       </div>
     </div>
   );
@@ -58,24 +58,24 @@ function QuizElements() {
 //------->Left Nav Bar<-------
 
 //------->Center Element<--------
-function UserContainer({ name }) {
+function UserContainer({ name, score }) {
   const [right, setRight] = useState('');
 
   return (
     <div className='userHolder'>
-      <CenterUserData right={right} />
+      <CenterUserData score={score} />
       <UserNav name={name} />
     </div>
   );
 }
 
-function CenterUserData({ right }) {
+function CenterUserData({ score }) {
   return (
     <div className='center'>
       {/* These will be used as get requests later on. */}
       <div className='correctSection'>
         <h3>Questions Correct</h3>
-        <span>{right}</span>
+        <span>{score}</span>
       </div>
     </div>
   );
