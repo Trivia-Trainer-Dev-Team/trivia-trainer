@@ -10,3 +10,65 @@ $text-color2: #a5d7e8;
 
 $border-radius: 8px;
 $marginTop: 50px;
+
+body {
+  background-color: #7cc6fe;
+}
+
+#quiz-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  height: 80%;
+  width: 80%;
+  background-color: #252d4a;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+}
+
+#quiz-question {
+  display: flex;
+  font-size: 40px;
+  color: white;
+  text-align: center;
+}
+
+#quiz-button {
+  background-color: $primary-color1;
+  color: $text-color1;
+  border: 5px solid #234668;
+  margin-top: 20px;
+  font-size: 16px;
+  padding: 5px;
+  width: 200px;
+  height: 60px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+#quiz-button:hover {
+  background-color: #555e7d;
+}
+
+#congrats-message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: #252d4a;
+  height: 80%;
+  width: 80%;
+  color: white;
+  position: absolute;
+  text-align: center;
+  font-size: 50px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+}

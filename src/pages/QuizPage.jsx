@@ -122,7 +122,7 @@ function QuizPage() {
       {loading ? (
         <div>...Data Loading...</div>
       ) : (
-        <div id='question-card'>
+        <div id="question-card">
           {quizEnd ? (
             <Congratulations correct={quizScore} goBackFunc={goBack} />
           ) : (
@@ -144,11 +144,16 @@ const QuizCard = ({ question, answerSubmit, decodeHTML }) => {
   const { question: encodedQuestion, answers } = question;
 
   return (
-    <div>
-      <div>{decodeHTML(encodedQuestion)}</div>
+    <div id="quiz-card">
+      <div id="quiz-question">{decodeHTML(encodedQuestion)}</div>
       {answers &&
         answers.map((answer, index) => (
-          <button key={index} onClick={answerSubmit} value={answer}>
+          <button
+            id="quiz-button"
+            key={index}
+            onClick={answerSubmit}
+            value={decodeHTML(answer)}
+          >
             {answer}
           </button>
         ))}
@@ -158,8 +163,11 @@ const QuizCard = ({ question, answerSubmit, decodeHTML }) => {
 
 const Congratulations = ({ correct, goBackFunc }) => {
   return (
-    <div>
-      <div>Congratulations! You got {correct} correct!</div>
+    <div id="congrats-page">
+      <div id="congrats-message">
+        {' '}
+        Congratulations! You got {correct} correct!
+      </div>
       <button onClick={goBackFunc}>Go Back to Home!</button>
     </div>
   );
