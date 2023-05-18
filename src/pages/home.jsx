@@ -6,6 +6,7 @@ function HomeElement() {
   const location = useLocation();
   const navigate = useNavigate();
   const { data } = location.state;
+  const [ userScore, setUserScore ] = useState(data.score);
   console.log(data);
 
   return (
@@ -14,7 +15,7 @@ function HomeElement() {
         <QuizSelectionBar />
       </div>
       <div className='userSection'>
-        <UserContainer name={data.name} score={data.score} />
+        <UserContainer name={data.name} score={userScore} setScore={setUserScore}/>
       </div>
     </div>
   );
@@ -65,13 +66,13 @@ function QuizElements() {
 //------->Left Nav Bar<-------
 
 //------->Center Element<--------
-function UserContainer({ name, score }) {
+function UserContainer({ name, score, setScore }) {
   const [right, setRight] = useState('');
 
   return (
     <div className='userHolder'>
       <CenterUserData score={score} />
-      <UserNav name={name} />
+      <UserNav name={name} setScore={setScore} />
     </div>
   );
 }
@@ -90,7 +91,7 @@ function CenterUserData({ score }) {
 
 //------->Center/Right Element<--------
 
-function UserNav({ name }) {
+function UserNav({ name, setScore }) {
   const logOut = function () {
     fetch('/logout', {
       method: 'DELETE',
@@ -107,19 +108,23 @@ function UserNav({ name }) {
   };
 
   const resetScore = function () {
-    fetch('/Users', {
+    const payload = { resetValue: 0 };
+    //console.log(payload); // Check the payload structure in the browser console
+    fetch('/users/reset', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify(payload),
     })
       .then((response) => {
-        if(response.ok){
-          console.log('score has been reset')
+        if (response.ok) {
+          setScore(0);
+          console.log('Score has been reset');
         }
       })
-      .catch((err) => console.log(err))
-  }
+      .catch((err) => console.log("this is the error" + err));
+  };
 
   return (
     <div className='userNav'>
@@ -130,7 +135,7 @@ function UserNav({ name }) {
       <button id='logoutBtn' className='secondary-button' onClick={logOut}>
         Log Out
       </button>
-      <button>Reset Me</button>
+      <button id='resetButton' className='secondary-button' onClick={resetScore}>Reset Me</button>
     </div>
   );
 }
