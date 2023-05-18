@@ -12,6 +12,8 @@ function QuizPage() {
   const [quizScore, setQuizScore] = useState(0);
   const [index, setIndex] = useState(0);
   const [quizEnd, setQuizEnd] = useState(false);
+  const [showAnswerFeedback, setShowAnswerFeedback] = useState(false);
+  const [correctAnswer, setCorrectAnswer] = useState(null);
 
   const fetchQuizData = () => {
     setLoading(true);
@@ -73,8 +75,12 @@ function QuizPage() {
         array[currentIndex],
       ];
     }
-
     return array;
+  }
+
+  function resetShowFeedback() {
+    setShowAnswerFeedback(false);
+    setCorrectAnswer(null);
   }
 
   const answerSubmission = async (event) => {
@@ -83,6 +89,11 @@ function QuizPage() {
 
     if (answer === currQuestion.correct_answer) {
       setQuizScore((prevScore) => prevScore + 1);
+      setCorrectAnswer(true);
+      setShowAnswerFeedback(true);
+    } else {
+      setCorrectAnswer(false);
+      setShowAnswerFeedback(true);
     }
 
     if (nextIndex >= quizList.length) {
@@ -136,31 +147,65 @@ function QuizPage() {
           )}
         </div>
       )}
+      <div id='feedbackModal'>
+        {showAnswerFeedback ? (
+          <AnswerFeedback
+            correctAnswer={correctAnswer}
+            resetShowFeedback={resetShowFeedback}
+          />
+        ) : null}
+      </div>
     </>
   );
 }
 
 const QuizCard = ({ question, answerSubmit, decodeHTML }) => {
   const { question: encodedQuestion, answers } = question;
+  const arrayOfLetters = ['A:    ', 'B:    ', 'C:    ', 'D:    '];
 
   return (
-    <div>
-      <div>{decodeHTML(encodedQuestion)}</div>
+    <div id='quiz-card'>
+      <div id='quiz-question'>{decodeHTML(encodedQuestion)}</div>
       {answers &&
         answers.map((answer, index) => (
-          <button key={index} onClick={answerSubmit} value={answer}>
-            {answer}
+          <button
+            id='quiz-button'
+            key={index}
+            onClick={answerSubmit}
+            value={decodeHTML(answer)}
+          >
+            {arrayOfLetters[index]}
+            {decodeHTML(answer)}
           </button>
         ))}
     </div>
   );
 };
 
+const AnswerFeedback = ({ correctAnswer, resetShowFeedback }) => {
+  // a modal displaying "Correct" or "Incorrect"
+  return (
+    <div id='feedbackContainer'>
+      <div id='feedbackMessage'>
+        {correctAnswer ? <h1>Correct! :)</h1> : <h1>Incorrect :(</h1>}
+      </div>
+      <button id='answerFeedbackButton' onClick={() => resetShowFeedback()}>
+        OK
+      </button>
+    </div>
+  );
+};
+
 const Congratulations = ({ correct, goBackFunc }) => {
   return (
-    <div>
-      <div>Congratulations! You got {correct} correct!</div>
-      <button onClick={goBackFunc}>Go Back to Home!</button>
+    <div id='congrats-page'>
+      <div id='congrats-message'>
+        {' '}
+        Congratulations! You got {correct} correct!
+        <button id='home-button' onClick={goBackFunc}>
+          Go Back to Home!
+        </button>
+      </div>
     </div>
   );
 };

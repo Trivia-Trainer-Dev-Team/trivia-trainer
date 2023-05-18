@@ -1,11 +1,14 @@
 import React, { Component, useEffect, useState } from 'react';
 import { useNavigate, NavLink, useLocation, Navigate } from 'react-router-dom';
 import '../stylings/home-page.scss';
+import DangerNoodle from '../../public/DangerNoodle.png';
+
 //------>Full Page<-----
 function HomeElement() {
   const location = useLocation();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { data } = location.state;
+  const [userScore, setUserScore] = useState(data.score);
   console.log(data);
 
   return (
@@ -14,7 +17,11 @@ function HomeElement() {
         <QuizSelectionBar />
       </div>
       <div className='userSection'>
-        <UserContainer name={data.name} score={data.score} />
+        <UserContainer
+          name={data.name}
+          score={userScore}
+          setScore={setUserScore}
+        />
       </div>
     </div>
   );
@@ -38,7 +45,7 @@ function QuizTitle() {
   );
 }
 
-function QuizElements() {
+export function QuizElements() {
   // reformat this to use elements that can navigate to specific urls.
   const elements = [
     'Sports',
@@ -65,13 +72,11 @@ function QuizElements() {
 //------->Left Nav Bar<-------
 
 //------->Center Element<--------
-function UserContainer({ name, score }) {
-  const [right, setRight] = useState('');
-
+export function UserContainer({ name, score, setScore }) {
   return (
     <div className='userHolder'>
       <CenterUserData score={score} />
-      <UserNav name={name} />
+      <UserNav name={name} setScore={setScore} />
     </div>
   );
 }
@@ -81,8 +86,8 @@ function CenterUserData({ score }) {
     <div className='center'>
       {/* These will be used as get requests later on. */}
       <div className='correctSection'>
-        <h3>Questions Correct</h3>
-        <span>{score}</span>
+        <h3>Questions Correct:</h3>
+        <h3>{score}</h3>
       </div>
     </div>
   );
@@ -90,7 +95,8 @@ function CenterUserData({ score }) {
 
 //------->Center/Right Element<--------
 
-function UserNav({ name }) {
+function UserNav({ name, setScore }) {
+  const navigate = useNavigate();
   const logOut = function () {
     fetch('/logout', {
       method: 'DELETE',
@@ -106,6 +112,25 @@ function UserNav({ name }) {
       .catch((err) => console.log(err));
   };
 
+  const resetScore = function () {
+    const payload = { resetValue: 0 };
+    //console.log(payload); // Check the payload structure in the browser console
+    fetch('/users/reset', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => {
+        if (response.ok) {
+          setScore(0);
+          console.log('Score has been reset');
+        }
+      })
+      .catch((err) => console.log('this is the error' + err));
+  };
+
   return (
     <div className='userNav'>
       <div className='userInfo'>
@@ -115,12 +140,15 @@ function UserNav({ name }) {
       <button id='logoutBtn' className='secondary-button' onClick={logOut}>
         Log Out
       </button>
+      <button id='resetBtn' className='secondary-button' onClick={resetScore}>
+        Reset Me
+      </button>
     </div>
   );
 }
 
 function UserImage() {
-  return <img src='#'></img>;
+  return <img src={DangerNoodle} alt='Danger Noodle' />;
 }
 
 function UserBody({ name }) {

@@ -87,7 +87,6 @@ userController.verifyUser = async (req, res, next) => {
         message: { err: 'An error occurred' },
       });
     }
-
     res.locals.user = user;
     return next();
   } catch (err) {
@@ -119,6 +118,30 @@ userController.updateScore = async (req, res, next) => {
       log: 'Error occurred in userController.updateScore',
       status: 400,
       message: { err: 'An error occurred' },
+    });
+  }
+};
+
+userController.resetScore = async (req, res, next) => {
+  const { ssid } = req.cookies;
+  try {
+    const user = await User.findOne({ _id: ssid });
+    if (!user) {
+      return next({
+        log: 'Error occurred in userController.resetScore',
+        status: 400,
+        message: { err: 'An error occurred in the resetScore' },
+      });
+    }
+    user.score = 0;
+    console.log("this is the user" + user)
+    user.save();
+    return next();
+  } catch (error) {
+    return next({
+      log: 'Error occurred in userController.deleteUser',
+      status: 400,
+      message: { err: 'An error occurred in deleteUser' },
     });
   }
 };

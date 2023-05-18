@@ -44,9 +44,11 @@ app.get('/users/cookie', userController.getUserFromCookie, (req, res) => {
 });
 // signup handler
 app.post(
-  '/users/',userController.hashpassword,
+  '/users/',
+  userController.hashpassword,
   userController.createUser,
   cookieController.setSSIDCookie,
+
   (req, res) => {
     return res.status(201).json(res.locals.user);
   }
@@ -61,16 +63,19 @@ app.patch('/users/', userController.updateScore, (req, res) => {
   return res.status(202).json('Score Updated');
 });
 
+app.patch('/users/reset', userController.resetScore, (req, res) => {
+  return res.status(204).json('Score Has Been Reset')
+})
 //handler for cookies
 //checks if current session is still active
 app.get('/', sessionController.isLoggedIn, (req,res) => {
   return res.redirect('/home')
 })
 
-//clear cookie and remove current session when logged out
-app.delete('/logout', sessionController.deleteSession,(req,res) => {
-  return res.redirect('/')
-})
+// clear cookie and remove current session when logged out
+app.delete('/logout', cookieController.deleteCookie, (req, res) => {
+  return res.status(200).json('Logout Successful!');
+});
 
 //global error handler
 app.use((err, req, res, next) => {
