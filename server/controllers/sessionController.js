@@ -21,8 +21,9 @@ sessionController.isLoggedIn = async (req, res, next) => {
 
 sessionController.startSession = async (req, res, next) => {
   try {
+    console.log('attempting to start a session');
     res.cookie('cookieId', res.locals.ssid);
-    await Session.create({ cookieID: res.locals.ssid });
+    await Session.create({ cookieId: res.locals.ssid });
     return next();
   } catch (err) {
     return next({

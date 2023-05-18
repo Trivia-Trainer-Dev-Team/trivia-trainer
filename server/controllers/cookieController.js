@@ -16,4 +16,16 @@ cookieController.setSSIDCookie = async (req, res, next) => {
   }
 };
 
+cookieController.deleteCookie = async (req, res, next) => {
+  try {
+    res.clearcookie('ssid', res.locals.user.id);
+  } catch (err) {
+    next({
+      log: 'An error occurred in cookieController in the deleteCookie middleware function',
+      status: 400,
+      message: { err: 'Deleting cookie was unsuccessful' },
+    });
+  }
+};
+
 module.exports = cookieController;
