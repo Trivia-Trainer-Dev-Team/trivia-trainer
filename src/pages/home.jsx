@@ -25,7 +25,6 @@ function HomeElement() {
 function QuizSelectionBar() {
   return (
     <div id='QuizBar'>
-    <div id='QuizBar'>
       <QuizTitle />
       <QuizElements />
     </div>
@@ -52,7 +51,6 @@ function QuizElements() {
   ];
 
   return (
-    <div id='Quizzes'>
     <div id='Quizzes'>
       {elements.map((el, i) => {
         return (
