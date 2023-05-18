@@ -6,11 +6,15 @@ import DangerNoodle from '../../public/DangerNoodle.png';
 //------>Full Page<-----
 function HomeElement() {
   const location = useLocation();
-  const navigate = useNavigate();
   const { data } = location.state;
   console.log(data);
 
   return (
+<<<<<<< HEAD
+    <div id="fullHomepage">
+      <QuizSelectionBar />
+      <UserContainer name={data.name} score={data.score} />
+=======
     <div id='fullHomepage'>
       <div className='quizSection'>
         <QuizSelectionBar />
@@ -18,6 +22,7 @@ function HomeElement() {
       <div className='userSection'>
         <UserContainer name={data.name} score={data.score} />
       </div>
+>>>>>>> dev
     </div>
   );
 }
@@ -34,8 +39,13 @@ function QuizSelectionBar() {
 
 function QuizTitle() {
   return (
+<<<<<<< HEAD
+    <div id="QuizTitle">
+      <h3>This is the title</h3>
+=======
     <div id='QuizTitle'>
       <h3>Choose Category</h3>
+>>>>>>> dev
     </div>
   );
 }
@@ -93,6 +103,7 @@ function CenterUserData({ score }) {
 //------->Center/Right Element<--------
 
 function UserNav({ name }) {
+  const navigate = useNavigate();
   const logOut = function () {
     fetch('/logout', {
       method: 'DELETE',
