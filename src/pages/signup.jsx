@@ -3,8 +3,11 @@ import { useNavigate } from 'react-router-dom';
 
 function SignupPage() {
   return (
-    <div id='pageContainer'>
-      <Logo id='logo' />
+    <div id="pageContainer">
+      <div id="page-title">
+        <h1>Sign Up!</h1>
+      </div>
+      <Logo id="logo" />
       <LoginContainer />
     </div>
   );
@@ -13,7 +16,7 @@ function SignupPage() {
 function Logo() {
   return (
     <div id='logo'>
-      <h1>Sign Up!</h1>
+      
     </div>
   );
 }

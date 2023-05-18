@@ -50,7 +50,7 @@ export function LoginFeature() {
         <h1 id="page-title">Login Page</h1>
         <h2 id="welcome">Welcome Back!</h2>
       </div>
-      <div className="inputFields">
+      <div className="inputsContainer">
         <input
           type="text"
           value={username}
