@@ -1,1 +1,1 @@
-# codequizapp
+# trivia-trainer
